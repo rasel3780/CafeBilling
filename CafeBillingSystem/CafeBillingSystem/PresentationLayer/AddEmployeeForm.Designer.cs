@@ -122,6 +122,7 @@
             this.Controls.Add(this.btnBack);
             this.Name = "AddEmployeeForm";
             this.Text = "AddEmployee";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.AddEmployeeForm_FormClosing);
             this.ResumeLayout(false);
             this.PerformLayout();
 

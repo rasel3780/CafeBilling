@@ -28,47 +28,154 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.btnLogin = new System.Windows.Forms.Button();
             this.txtUsername = new System.Windows.Forms.TextBox();
             this.txtPassword = new System.Windows.Forms.TextBox();
+            this.progressBar = new System.Windows.Forms.ProgressBar();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.panel1 = new System.Windows.Forms.Panel();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
+            this.panel2.SuspendLayout();
+            this.tableLayoutPanel1.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnLogin
             // 
-            this.btnLogin.Location = new System.Drawing.Point(285, 214);
+            this.btnLogin.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.btnLogin.BackColor = System.Drawing.Color.LightCyan;
+            this.btnLogin.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnLogin.Font = new System.Drawing.Font("Microsoft YaHei UI", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnLogin.Location = new System.Drawing.Point(113, 140);
             this.btnLogin.Name = "btnLogin";
-            this.btnLogin.Size = new System.Drawing.Size(200, 30);
+            this.btnLogin.Size = new System.Drawing.Size(218, 30);
             this.btnLogin.TabIndex = 0;
             this.btnLogin.Text = "Login";
-            this.btnLogin.UseVisualStyleBackColor = true;
+            this.btnLogin.UseVisualStyleBackColor = false;
             this.btnLogin.Click += new System.EventHandler(this.btnLogin_Click);
             // 
             // txtUsername
             // 
-            this.txtUsername.Location = new System.Drawing.Point(285, 95);
+            this.txtUsername.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.txtUsername.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtUsername.Location = new System.Drawing.Point(113, 20);
             this.txtUsername.Name = "txtUsername";
-            this.txtUsername.Size = new System.Drawing.Size(200, 22);
+            this.txtUsername.Size = new System.Drawing.Size(218, 22);
             this.txtUsername.TabIndex = 1;
             // 
             // txtPassword
             // 
-            this.txtPassword.Location = new System.Drawing.Point(285, 144);
+            this.txtPassword.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.txtPassword.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtPassword.Location = new System.Drawing.Point(113, 82);
             this.txtPassword.Name = "txtPassword";
-            this.txtPassword.Size = new System.Drawing.Size(200, 22);
+            this.txtPassword.Size = new System.Drawing.Size(218, 22);
             this.txtPassword.TabIndex = 1;
+            // 
+            // progressBar
+            // 
+            this.progressBar.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.progressBar.Location = new System.Drawing.Point(121, 211);
+            this.progressBar.Name = "progressBar";
+            this.progressBar.Size = new System.Drawing.Size(218, 23);
+            this.progressBar.Style = System.Windows.Forms.ProgressBarStyle.Marquee;
+            this.progressBar.TabIndex = 3;
+            this.progressBar.Visible = false;
+            // 
+            // label2
+            // 
+            this.label2.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft YaHei UI", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(34, 83);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(73, 19);
+            this.label2.TabIndex = 2;
+            this.label2.Text = "Password";
+            // 
+            // label1
+            // 
+            this.label1.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft YaHei UI", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(31, 21);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(76, 19);
+            this.label1.TabIndex = 2;
+            this.label1.Text = "Username";
+            // 
+            // errorProvider1
+            // 
+            this.errorProvider1.ContainerControl = this;
+            // 
+            // panel2
+            // 
+            this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel2.Controls.Add(this.tableLayoutPanel1);
+            this.panel2.Controls.Add(this.panel1);
+            this.panel2.Location = new System.Drawing.Point(12, 12);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(857, 426);
+            this.panel2.TabIndex = 3;
+            // 
+            // tableLayoutPanel1
+            // 
+            this.tableLayoutPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tableLayoutPanel1.ColumnCount = 2;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 70F));
+            this.tableLayoutPanel1.Controls.Add(this.label1, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.txtUsername, 1, 0);
+            this.tableLayoutPanel1.Controls.Add(this.label2, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.txtPassword, 1, 1);
+            this.tableLayoutPanel1.Controls.Add(this.btnLogin, 1, 2);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(264, 105);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.RowCount = 3;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(367, 187);
+            this.tableLayoutPanel1.TabIndex = 5;
+            // 
+            // panel1
+            // 
+            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel1.Controls.Add(this.progressBar);
+            this.panel1.Location = new System.Drawing.Point(255, 86);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(388, 252);
+            this.panel1.TabIndex = 6;
             // 
             // LoginForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.txtPassword);
-            this.Controls.Add(this.txtUsername);
-            this.Controls.Add(this.btnLogin);
+            this.ClientSize = new System.Drawing.Size(881, 450);
+            this.Controls.Add(this.panel2);
             this.Name = "LoginForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "LoginForm";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.LoginForm_FormClosing);
+            this.Load += new System.EventHandler(this.LoginForm_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
+            this.panel2.ResumeLayout(false);
+            this.tableLayoutPanel1.ResumeLayout(false);
+            this.tableLayoutPanel1.PerformLayout();
+            this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -77,5 +184,12 @@
         private System.Windows.Forms.Button btnLogin;
         private System.Windows.Forms.TextBox txtUsername;
         private System.Windows.Forms.TextBox txtPassword;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ProgressBar progressBar;
+        private System.Windows.Forms.ErrorProvider errorProvider1;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private System.Windows.Forms.Panel panel1;
     }
 }
