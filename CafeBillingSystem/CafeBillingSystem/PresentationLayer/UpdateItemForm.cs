@@ -34,7 +34,14 @@ namespace CafeBillingSystem.PresentationLayer
         private void LoadCategories()
         {
             var categories = _itemRepository.GetDistinctCategories();
-            cmbCategories.Items.AddRange(categories.ToArray()); 
+            cmbCategories.Items.Clear();
+            foreach (var category in categories)
+            {
+                if (!cmbCategories.Items.Contains(category))
+                {
+                    cmbCategories.Items.Add(category);
+                }
+            }
         }
 
         private void LoadItemDetails()
@@ -48,10 +55,12 @@ namespace CafeBillingSystem.PresentationLayer
                 cmbCategories.Items.Add(_itemToUpdate.Category);
             }
             cmbCategories.SelectedItem = _itemToUpdate.Category;
+            txtNewCategory.Text = _itemToUpdate.Category;
+
 
             if (!string.IsNullOrEmpty(_itemToUpdate.PicturePath) && File.Exists(_itemToUpdate.PicturePath))
             {
-                picItem.Image = ResizeImage(Image.FromFile(_itemToUpdate.PicturePath), new Size(50, 50));
+                picItem.Image = ResizeImage(Image.FromFile(_itemToUpdate.PicturePath), new Size(picItem.Width, picItem.Height));
                 _previousPicturePath = _itemToUpdate.PicturePath;
             }
         }
@@ -96,9 +105,12 @@ namespace CafeBillingSystem.PresentationLayer
 
 
             // Update item details
+            string updatedCategory = !string.IsNullOrEmpty(txtNewCategory.Text) ? txtNewCategory.Text : cmbCategories.SelectedItem?.ToString();
+
+
             _itemToUpdate.Name = txtName.Text;
             _itemToUpdate.Price = decimal.Parse(txtPrice.Text);
-            _itemToUpdate.Category = cmbCategories.SelectedItem?.ToString() ?? txtNewCategory.Text;
+            _itemToUpdate.Category = updatedCategory;
             _itemToUpdate.PicturePath = imagePath;
 
             _itemRepository.Update(_itemToUpdate);

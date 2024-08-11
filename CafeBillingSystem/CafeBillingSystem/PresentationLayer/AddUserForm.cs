@@ -13,11 +13,11 @@ using System.Windows.Forms;
 
 namespace CafeBillingSystem.PresentationLayer
 {
-    public partial class AddEmployeeForm : Form
+    public partial class AddUserForm : Form
     {
         private readonly Repository<User> _userRepository;
         private readonly User _loggedInUser;
-        public AddEmployeeForm(User loggedInUser)
+        public AddUserForm(User loggedInUser)
         {
             InitializeComponent();
             var context = new CafeDbContext();
@@ -51,7 +51,9 @@ namespace CafeBillingSystem.PresentationLayer
 
             _userRepository.Add(emp);
             MessageBox.Show("User Add successfully.");
-            this.Close();
+            var adminDashBoard = new AdminDashboardForm(_loggedInUser);
+            adminDashBoard.Show();
+            this.Hide();
         }
 
         private void AddEmployeeForm_FormClosing(object sender, FormClosingEventArgs e)

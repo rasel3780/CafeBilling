@@ -23,6 +23,18 @@ namespace CafeBillingSystem.PresentationLayer
             _userRepository = new Repository<User>(context);
         }
 
+       
+
+        private void LoginForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void LoginForm_Load(object sender, EventArgs e)
+        {
+
+        }
+
         private void btnLogin_Click(object sender, EventArgs e)
         {
             progressBar.Visible = true;
@@ -39,7 +51,7 @@ namespace CafeBillingSystem.PresentationLayer
 
                     if (user != null)
                     {
-                       
+
                         var dashBoard = new AdminDashboardForm(user);
                         dashBoard.Show();
                         progressBar.Visible = false;
@@ -54,16 +66,6 @@ namespace CafeBillingSystem.PresentationLayer
                     }
                 }));
             });
-        }
-
-        private void LoginForm_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            Application.Exit();
-        }
-
-        private void LoginForm_Load(object sender, EventArgs e)
-        {
-
         }
     }
 }

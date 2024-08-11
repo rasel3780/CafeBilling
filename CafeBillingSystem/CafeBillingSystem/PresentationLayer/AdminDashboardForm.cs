@@ -60,7 +60,18 @@ namespace CafeBillingSystem.PresentationLayer
             dgvUsers.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
 
 
-
+            if (!dgvUsers.Columns.Contains("Update"))
+            {
+                var updateButtonColumn = new DataGridViewButtonColumn
+                {
+                    Name="Update",
+                    HeaderText = "Update",
+                    Text = "Update",
+                    UseColumnTextForButtonValue = true
+                };
+                dgvUsers.Columns.Add(updateButtonColumn);
+            }
+            
             if (!dgvUsers.Columns.Contains("Delete"))
             {
                 var deleteButtonColumn = new DataGridViewButtonColumn
@@ -72,6 +83,8 @@ namespace CafeBillingSystem.PresentationLayer
                 };
                 dgvUsers.Columns.Add(deleteButtonColumn);
             }
+
+            
             SetEqualColumnFillWeights(dgvUsers);
 
         }
@@ -181,22 +194,53 @@ namespace CafeBillingSystem.PresentationLayer
         }
         #endregion
 
-        private void dgvUsers_CellContentClick_1(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.ColumnIndex == dgvUsers.Columns["Delete"].Index && e.RowIndex >= 0)
-            {
-                var userId = (int)dgvUsers.Rows[e.RowIndex].Cells["UserId"].Value;
-                var result = MessageBox.Show("Are you sure you want to delete this user?", "Confirm Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                if (result == DialogResult.Yes)
-                {
-                    DeleteUser(userId);
-                }
-            }
-        }
+   
 
         private void AdminDashboardForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             Application.Exit();
+        }
+
+      
+
+        private void dgvItems_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if (dgvItems.Columns[e.ColumnIndex].Name == "Delete")
+            {
+                e.CellStyle.BackColor = Color.Red;
+                e.CellStyle.ForeColor = Color.White;
+            }
+            else if (dgvItems.Columns[e.ColumnIndex].Name == "Update")
+            {
+                e.CellStyle.BackColor = Color.Green;
+                e.CellStyle.ForeColor = Color.White;
+            }
+        }
+
+        private void btnAddUser_Click(object sender, EventArgs e)
+        {
+
+            if (_loggedInUser.Role == Role.Admin)
+            {
+                this.Hide();
+                var addEmployeeFrom = new AddUserForm(_loggedInUser);
+                addEmployeeFrom.Show();
+            }
+        }
+
+        private void btnAddItem_Click_1(object sender, EventArgs e)
+        {
+            var addItemForm = new AddItemForm(_loggedInUser);
+            addItemForm.Show();
+            this.Hide();
+        }
+
+        private void btnLogout_Click(object sender, EventArgs e)
+        {
+
+            var loginForm = new LoginForm();
+            loginForm.Show();
+            this.Hide();
         }
 
         private void dgvItems_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -228,47 +272,35 @@ namespace CafeBillingSystem.PresentationLayer
                 }
 
             }
-
         }
 
-        private void dgvItems_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        private void dgvUsers_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (dgvItems.Columns[e.ColumnIndex].Name == "Delete")
+            
+            if(e.RowIndex >= 0)
             {
-                e.CellStyle.BackColor = Color.Red;
-                e.CellStyle.ForeColor = Color.White;
+                var userId = (int)dgvUsers.Rows[e.RowIndex ].Cells["UserId"].Value;
+
+                if(e.ColumnIndex == dgvUsers.Columns["Update"].Index)
+                {
+
+                }
+
+                else if(e.ColumnIndex == dgvUsers.Columns["Delete"].Index)
+                {
+                    var user = _userRepository.GetById(userId);
+                    if (user != null)
+                    {
+                        var confirm = MessageBox.Show("Are you sure, you want to delete the user?", "Confirm delete", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                        if (confirm == DialogResult.Yes)
+                        {
+                            _userRepository.Delete(userId);
+                            LoadUsers();
+                            MessageBox.Show("User removed", "success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        }
+                    }
+                }
             }
-            else if (dgvItems.Columns[e.ColumnIndex].Name == "Update")
-            {
-                e.CellStyle.BackColor = Color.Green;
-                e.CellStyle.ForeColor = Color.White;
-            }
-        }
-
-        private void btnAddUser_Click(object sender, EventArgs e)
-        {
-
-            if (_loggedInUser.Role == Role.Admin)
-            {
-                this.Hide();
-                var addEmployeeFrom = new AddEmployeeForm(_loggedInUser);
-                addEmployeeFrom.Show();
-            }
-        }
-
-        private void btnAddItem_Click_1(object sender, EventArgs e)
-        {
-            var addItemForm = new AddItemForm(_loggedInUser);
-            addItemForm.Show();
-            this.Hide();
-        }
-
-        private void btnLogout_Click(object sender, EventArgs e)
-        {
-
-            var loginForm = new LoginForm();
-            loginForm.Show();
-            this.Hide();
         }
     }
 }

@@ -103,6 +103,7 @@
             this.dgvItems.RowTemplate.Height = 24;
             this.dgvItems.Size = new System.Drawing.Size(535, 391);
             this.dgvItems.TabIndex = 20;
+            this.dgvItems.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvItems_CellContentClick);
             // 
             // dgvUsers
             // 
@@ -114,6 +115,7 @@
             this.dgvUsers.RowTemplate.Height = 24;
             this.dgvUsers.Size = new System.Drawing.Size(284, 391);
             this.dgvUsers.TabIndex = 19;
+            this.dgvUsers.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvUsers_CellContentClick);
             // 
             // label1
             // 
