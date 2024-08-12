@@ -281,8 +281,14 @@ namespace CafeBillingSystem.PresentationLayer
             {
                 var userId = (int)dgvUsers.Rows[e.RowIndex ].Cells["UserId"].Value;
 
+
                 if(e.ColumnIndex == dgvUsers.Columns["Update"].Index)
                 {
+                    var user = _userRepository.GetById(userId);
+
+                    var updateUserForm = new UpdateUserForm(_loggedInUser, user);
+                    updateUserForm.Show();
+                    this.Hide();
 
                 }
 

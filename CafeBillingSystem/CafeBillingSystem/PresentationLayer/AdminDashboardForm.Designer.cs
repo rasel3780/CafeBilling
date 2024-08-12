@@ -174,7 +174,7 @@
             this.Controls.Add(this.panel1);
             this.Name = "AdminDashboardForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Dashboard";
+            this.Text = "Admin Dashboard";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.AdminDashboardForm_FormClosing);
             this.Load += new System.EventHandler(this.AdminDashboardForm_Load);
             this.panel1.ResumeLayout(false);
