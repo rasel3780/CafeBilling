@@ -10,7 +10,7 @@ namespace CafeBillingSystem.DataAccessLayer.Repositories
 {
     public class Repository<T> : IRepository<T> where T : class
     {
-        private readonly CafeDbContext _context;
+        protected readonly CafeDbContext _context;
         private readonly DbSet<T> _dbSet;
 
         public Repository(CafeDbContext context)

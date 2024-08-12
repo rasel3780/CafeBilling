@@ -23,21 +23,49 @@ namespace CafeBillingSystem.PresentationLayer
             _userRepository = new Repository<User>(context);
         }
 
+       
+
+        private void LoginForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void LoginForm_Load(object sender, EventArgs e)
+        {
+
+        }
+
         private void btnLogin_Click(object sender, EventArgs e)
         {
-            var user = _userRepository.GetAll()
-                .FirstOrDefault(u => u.Username == txtUsername.Text && u.Password == txtPassword.Text);
-            if(user!=null)
+            progressBar.Visible = true;
+            btnLogin.Enabled = false;
+
+            Task.Run(() =>
             {
-                var dashBoard = new AdminDashboardForm(user);
-                this.Hide();
-                dashBoard.ShowDialog();
-                this.Show();
-            }
-            else
-            {
-                MessageBox.Show("Invalid Username or Password");
-            }
+                var user = _userRepository.GetAll()
+               .FirstOrDefault(u => u.Username == txtUsername.Text && u.Password == txtPassword.Text);
+
+                this.Invoke(new Action(() =>
+
+                {
+
+                    if (user != null)
+                    {
+
+                        var dashBoard = new AdminDashboardForm(user);
+                        dashBoard.Show();
+                        progressBar.Visible = false;
+                        this.Hide();
+
+                    }
+                    else
+                    {
+                        btnLogin.Enabled = true;
+                        progressBar.Visible = false;
+                        MessageBox.Show("Invalid Username or Password");
+                    }
+                }));
+            });
         }
     }
 }

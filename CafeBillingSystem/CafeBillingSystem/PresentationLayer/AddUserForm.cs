@@ -13,21 +13,24 @@ using System.Windows.Forms;
 
 namespace CafeBillingSystem.PresentationLayer
 {
-    public partial class AddEmployeeForm : Form
+    public partial class AddUserForm : Form
     {
         private readonly Repository<User> _userRepository;
-        public AddEmployeeForm()
+        private readonly User _loggedInUser;
+        public AddUserForm(User loggedInUser)
         {
             InitializeComponent();
             var context = new CafeDbContext();
             _userRepository = new Repository<User>(context);
-            cmbRole.Items.AddRange(new string[] {"Admin", "Employee" });
-            
+            cmbRole.Items.AddRange(new string[] { "Admin", "Employee" });
+            _loggedInUser = loggedInUser;
         }
 
         private void btnBack_Click(object sender, EventArgs e)
         {
-
+            var adminDashBoard = new AdminDashboardForm(_loggedInUser);
+            adminDashBoard.Show();
+            this.Hide();
         }
 
         private void btnAddUser_Click(object sender, EventArgs e)
@@ -48,7 +51,14 @@ namespace CafeBillingSystem.PresentationLayer
 
             _userRepository.Add(emp);
             MessageBox.Show("User Add successfully.");
-            this.Close();
+            var adminDashBoard = new AdminDashboardForm(_loggedInUser);
+            adminDashBoard.Show();
+            this.Hide();
+        }
+
+        private void AddEmployeeForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Application.Exit();
         }
     }
 }

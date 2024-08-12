@@ -12,6 +12,7 @@ namespace CafeBillingSystem.DataAccessLayer.ApplicationDbContext
     public class CafeDbContext:DbContext
     {
         public DbSet<User> Users { get; set; }
+        public DbSet<Item> Items { get; set; }
 
         public CafeDbContext():base("CafeDbConnection")
         {
