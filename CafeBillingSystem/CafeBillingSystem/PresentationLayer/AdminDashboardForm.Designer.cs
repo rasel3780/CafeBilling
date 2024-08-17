@@ -29,6 +29,8 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.btnOrder = new System.Windows.Forms.Button();
             this.btnLogout = new System.Windows.Forms.Button();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.dgvItems = new System.Windows.Forms.DataGridView();
@@ -38,6 +40,7 @@
             this.btnAddUser = new System.Windows.Forms.Button();
             this.btnAddItem = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
+            this.panel2.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvItems)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvUsers)).BeginInit();
@@ -48,20 +51,45 @@
             this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel1.Controls.Add(this.btnLogout);
+            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel1.Controls.Add(this.panel2);
             this.panel1.Controls.Add(this.tableLayoutPanel1);
             this.panel1.Location = new System.Drawing.Point(12, 12);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(863, 577);
+            this.panel1.Size = new System.Drawing.Size(1196, 577);
             this.panel1.TabIndex = 0;
+            // 
+            // panel2
+            // 
+            this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel2.Controls.Add(this.btnOrder);
+            this.panel2.Controls.Add(this.btnLogout);
+            this.panel2.Location = new System.Drawing.Point(17, 538);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(1159, 34);
+            this.panel2.TabIndex = 3;
+            // 
+            // btnOrder
+            // 
+            this.btnOrder.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.btnOrder.BackColor = System.Drawing.Color.Blue;
+            this.btnOrder.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.btnOrder.Location = new System.Drawing.Point(0, 0);
+            this.btnOrder.Name = "btnOrder";
+            this.btnOrder.Size = new System.Drawing.Size(132, 34);
+            this.btnOrder.TabIndex = 2;
+            this.btnOrder.Text = "Go to Order page";
+            this.btnOrder.UseVisualStyleBackColor = false;
+            this.btnOrder.Click += new System.EventHandler(this.btnOrder_Click);
             // 
             // btnLogout
             // 
-            this.btnLogout.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnLogout.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.btnLogout.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.btnLogout.Font = new System.Drawing.Font("Microsoft YaHei UI", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnLogout.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.btnLogout.Location = new System.Drawing.Point(759, 540);
+            this.btnLogout.Location = new System.Drawing.Point(1070, 0);
             this.btnLogout.Name = "btnLogout";
             this.btnLogout.Size = new System.Drawing.Size(89, 34);
             this.btnLogout.TabIndex = 1;
@@ -71,8 +99,7 @@
             // 
             // tableLayoutPanel1
             // 
-            this.tableLayoutPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.tableLayoutPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tableLayoutPanel1.BackColor = System.Drawing.SystemColors.Window;
             this.tableLayoutPanel1.ColumnCount = 2;
@@ -90,18 +117,18 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.108597F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 93.8914F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(831, 458);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(1162, 456);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // dgvItems
             // 
             this.dgvItems.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvItems.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvItems.Location = new System.Drawing.Point(293, 28);
+            this.dgvItems.Location = new System.Drawing.Point(409, 28);
             this.dgvItems.Name = "dgvItems";
             this.dgvItems.RowHeadersWidth = 51;
             this.dgvItems.RowTemplate.Height = 24;
-            this.dgvItems.Size = new System.Drawing.Size(535, 391);
+            this.dgvItems.Size = new System.Drawing.Size(750, 389);
             this.dgvItems.TabIndex = 20;
             this.dgvItems.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvItems_CellContentClick);
             // 
@@ -113,7 +140,7 @@
             this.dgvUsers.Name = "dgvUsers";
             this.dgvUsers.RowHeadersWidth = 51;
             this.dgvUsers.RowTemplate.Height = 24;
-            this.dgvUsers.Size = new System.Drawing.Size(284, 391);
+            this.dgvUsers.Size = new System.Drawing.Size(400, 389);
             this.dgvUsers.TabIndex = 19;
             this.dgvUsers.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvUsers_CellContentClick);
             // 
@@ -122,7 +149,7 @@
             this.label1.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label1.AutoSize = true;
             this.label1.BackColor = System.Drawing.SystemColors.Window;
-            this.label1.Location = new System.Drawing.Point(117, 4);
+            this.label1.Location = new System.Drawing.Point(175, 4);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(55, 16);
             this.label1.TabIndex = 0;
@@ -132,7 +159,7 @@
             // 
             this.label2.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(541, 4);
+            this.label2.Location = new System.Drawing.Point(764, 4);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(39, 16);
             this.label2.TabIndex = 0;
@@ -144,7 +171,7 @@
             this.btnAddUser.BackColor = System.Drawing.Color.Green;
             this.btnAddUser.Font = new System.Drawing.Font("Microsoft YaHei UI", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAddUser.ForeColor = System.Drawing.Color.GhostWhite;
-            this.btnAddUser.Location = new System.Drawing.Point(95, 425);
+            this.btnAddUser.Location = new System.Drawing.Point(153, 423);
             this.btnAddUser.Name = "btnAddUser";
             this.btnAddUser.Size = new System.Drawing.Size(100, 29);
             this.btnAddUser.TabIndex = 21;
@@ -158,7 +185,7 @@
             this.btnAddItem.BackColor = System.Drawing.Color.Green;
             this.btnAddItem.Font = new System.Drawing.Font("Microsoft YaHei UI", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAddItem.ForeColor = System.Drawing.Color.GhostWhite;
-            this.btnAddItem.Location = new System.Drawing.Point(510, 425);
+            this.btnAddItem.Location = new System.Drawing.Point(734, 423);
             this.btnAddItem.Name = "btnAddItem";
             this.btnAddItem.Size = new System.Drawing.Size(100, 29);
             this.btnAddItem.TabIndex = 21;
@@ -170,7 +197,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(886, 601);
+            this.ClientSize = new System.Drawing.Size(1219, 601);
             this.Controls.Add(this.panel1);
             this.Name = "AdminDashboardForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -178,6 +205,7 @@
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.AdminDashboardForm_FormClosing);
             this.Load += new System.EventHandler(this.AdminDashboardForm_Load);
             this.panel1.ResumeLayout(false);
+            this.panel2.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvItems)).EndInit();
@@ -197,5 +225,7 @@
         private System.Windows.Forms.Button btnAddUser;
         private System.Windows.Forms.Button btnAddItem;
         private System.Windows.Forms.Button btnLogout;
+        private System.Windows.Forms.Button btnOrder;
+        private System.Windows.Forms.Panel panel2;
     }
 }

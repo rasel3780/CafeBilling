@@ -49,7 +49,7 @@
             // btnSave
             // 
             this.btnSave.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.btnSave.Location = new System.Drawing.Point(274, 368);
+            this.btnSave.Location = new System.Drawing.Point(274, 369);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(109, 34);
             this.btnSave.TabIndex = 4;
@@ -60,7 +60,7 @@
             // btnCancle
             // 
             this.btnCancle.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.btnCancle.Location = new System.Drawing.Point(627, 368);
+            this.btnCancle.Location = new System.Drawing.Point(628, 370);
             this.btnCancle.Name = "btnCancle";
             this.btnCancle.Size = new System.Drawing.Size(98, 33);
             this.btnCancle.TabIndex = 7;
@@ -73,7 +73,7 @@
             this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel1.Controls.Add(this.tableLayoutPanel1);
             this.panel1.Location = new System.Drawing.Point(12, 29);
             this.panel1.Name = "panel1";
@@ -108,7 +108,7 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.49175F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 23.53823F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 14.9925F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(967, 418);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(969, 420);
             this.tableLayoutPanel1.TabIndex = 8;
             this.tableLayoutPanel1.Paint += new System.Windows.Forms.PaintEventHandler(this.tableLayoutPanel1_Paint);
             // 
@@ -171,7 +171,7 @@
             // picItem
             // 
             this.picItem.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.picItem.Location = new System.Drawing.Point(389, 257);
+            this.picItem.Location = new System.Drawing.Point(389, 258);
             this.picItem.Name = "picItem";
             this.picItem.Size = new System.Drawing.Size(144, 92);
             this.picItem.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -181,7 +181,7 @@
             // btnBrowse
             // 
             this.btnBrowse.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.btnBrowse.Location = new System.Drawing.Point(389, 208);
+            this.btnBrowse.Location = new System.Drawing.Point(389, 209);
             this.btnBrowse.Name = "btnBrowse";
             this.btnBrowse.Size = new System.Drawing.Size(75, 23);
             this.btnBrowse.TabIndex = 8;

@@ -308,5 +308,12 @@ namespace CafeBillingSystem.PresentationLayer
                 }
             }
         }
+
+        private void btnOrder_Click(object sender, EventArgs e)
+        {
+            var orderForm = new OrderForm(_loggedInUser);
+            orderForm.Show();
+            this.Hide();
+        }
     }
 }
