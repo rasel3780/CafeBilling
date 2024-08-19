@@ -42,10 +42,12 @@
             this.lblTotal = new System.Windows.Forms.Label();
             this.dgvItems = new System.Windows.Forms.DataGridView();
             this.btnRest = new System.Windows.Forms.Button();
+            this.dgvCart = new System.Windows.Forms.DataGridView();
             this.mainPanel.SuspendLayout();
             this.mainTableLayoutPanel.SuspendLayout();
             this.summeryTableLayoutPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvItems)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvCart)).BeginInit();
             this.SuspendLayout();
             // 
             // btnLogout
@@ -54,7 +56,7 @@
             this.btnLogout.BackColor = System.Drawing.Color.Red;
             this.btnLogout.Font = new System.Drawing.Font("Microsoft YaHei UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnLogout.ForeColor = System.Drawing.SystemColors.HighlightText;
-            this.btnLogout.Location = new System.Drawing.Point(1160, 535);
+            this.btnLogout.Location = new System.Drawing.Point(828, 589);
             this.btnLogout.Name = "btnLogout";
             this.btnLogout.Size = new System.Drawing.Size(88, 31);
             this.btnLogout.TabIndex = 1;
@@ -64,35 +66,32 @@
             // 
             // mainPanel
             // 
-            this.mainPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.mainPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right)));
             this.mainPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.mainPanel.Controls.Add(this.btnLogout);
             this.mainPanel.Controls.Add(this.mainTableLayoutPanel);
             this.mainPanel.Location = new System.Drawing.Point(5, 5);
             this.mainPanel.Name = "mainPanel";
-            this.mainPanel.Size = new System.Drawing.Size(1262, 571);
+            this.mainPanel.Size = new System.Drawing.Size(930, 625);
             this.mainPanel.TabIndex = 2;
             // 
             // mainTableLayoutPanel
             // 
-            this.mainTableLayoutPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.mainTableLayoutPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right)));
             this.mainTableLayoutPanel.ColumnCount = 2;
             this.mainTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.mainTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.mainTableLayoutPanel.Controls.Add(this.summeryTableLayoutPanel, 1, 2);
             this.mainTableLayoutPanel.Controls.Add(this.dgvItems, 0, 0);
             this.mainTableLayoutPanel.Controls.Add(this.btnRest, 1, 1);
+            this.mainTableLayoutPanel.Controls.Add(this.dgvCart, 1, 0);
             this.mainTableLayoutPanel.Location = new System.Drawing.Point(19, 20);
             this.mainTableLayoutPanel.Name = "mainTableLayoutPanel";
             this.mainTableLayoutPanel.RowCount = 3;
             this.mainTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 62.86837F));
             this.mainTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 8.447937F));
             this.mainTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 28.48723F));
-            this.mainTableLayoutPanel.Size = new System.Drawing.Size(1229, 509);
+            this.mainTableLayoutPanel.Size = new System.Drawing.Size(897, 563);
             this.mainTableLayoutPanel.TabIndex = 0;
             // 
             // summeryTableLayoutPanel
@@ -111,7 +110,7 @@
             this.summeryTableLayoutPanel.Controls.Add(this.label7, 0, 3);
             this.summeryTableLayoutPanel.Controls.Add(this.lblTotal, 1, 3);
             this.summeryTableLayoutPanel.Font = new System.Drawing.Font("Microsoft YaHei UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.summeryTableLayoutPanel.Location = new System.Drawing.Point(797, 377);
+            this.summeryTableLayoutPanel.Location = new System.Drawing.Point(548, 423);
             this.summeryTableLayoutPanel.Name = "summeryTableLayoutPanel";
             this.summeryTableLayoutPanel.RowCount = 4;
             this.summeryTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 54.83871F));
@@ -195,15 +194,13 @@
             // 
             // dgvItems
             // 
-            this.dgvItems.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dgvItems.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvItems.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvItems.Location = new System.Drawing.Point(3, 3);
             this.dgvItems.Name = "dgvItems";
             this.dgvItems.RowHeadersWidth = 51;
             this.dgvItems.RowTemplate.Height = 24;
-            this.dgvItems.Size = new System.Drawing.Size(608, 314);
+            this.dgvItems.Size = new System.Drawing.Size(442, 348);
             this.dgvItems.TabIndex = 3;
             this.dgvItems.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvItems_CellContentClick);
             // 
@@ -213,7 +210,7 @@
             this.btnRest.BackColor = System.Drawing.Color.Gold;
             this.btnRest.Font = new System.Drawing.Font("Microsoft YaHei UI", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnRest.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.btnRest.Location = new System.Drawing.Point(883, 327);
+            this.btnRest.Location = new System.Drawing.Point(634, 363);
             this.btnRest.Name = "btnRest";
             this.btnRest.Size = new System.Drawing.Size(77, 29);
             this.btnRest.TabIndex = 4;
@@ -221,13 +218,26 @@
             this.btnRest.UseVisualStyleBackColor = false;
             this.btnRest.Click += new System.EventHandler(this.btnRest_Click);
             // 
+            // dgvCart
+            // 
+            this.dgvCart.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvCart.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvCart.Location = new System.Drawing.Point(451, 3);
+            this.dgvCart.Name = "dgvCart";
+            this.dgvCart.RowHeadersWidth = 51;
+            this.dgvCart.RowTemplate.Height = 24;
+            this.dgvCart.Size = new System.Drawing.Size(443, 348);
+            this.dgvCart.TabIndex = 5;
+            this.dgvCart.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCart_CellContentClick);
+            // 
             // OrderForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1272, 580);
+            this.ClientSize = new System.Drawing.Size(940, 634);
             this.Controls.Add(this.mainPanel);
             this.Name = "OrderForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Order";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.OrderForm_FormClosing);
             this.Load += new System.EventHandler(this.OrderForm_Load);
@@ -236,8 +246,8 @@
             this.summeryTableLayoutPanel.ResumeLayout(false);
             this.summeryTableLayoutPanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvItems)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvCart)).EndInit();
             this.ResumeLayout(false);
-
         }
 
         #endregion
@@ -255,5 +265,6 @@
         private System.Windows.Forms.Label lblTotal;
         private System.Windows.Forms.DataGridView dgvItems;
         private System.Windows.Forms.Button btnRest;
+        private System.Windows.Forms.DataGridView dgvCart;
     }
 }

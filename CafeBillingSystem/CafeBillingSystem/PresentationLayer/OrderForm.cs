@@ -76,7 +76,7 @@ namespace CafeBillingSystem.PresentationLayer
             }
             foreach(var foodItem in  cartItems)
             {
-                MessageBox.Show("Key:"+foodItem.Key.ToString()+":"+foodItem.Value.Name+"-Quantity:"+foodItem.Value.Quantity.ToString());
+                MessageBox.Show("Key:"+foodItem.Key.ToString()+":"+foodItem.Value.Name+"-Quantity:"+foodItem.Value.Quantity.ToString()+"-id:"+foodItem.Value.ItemId);
             }
             UpdateCartView();
         }
@@ -84,10 +84,9 @@ namespace CafeBillingSystem.PresentationLayer
         private void UpdateCartView()
         {
 
-            //var cartItemsList = cartItems.Values.ToList();
-            //dgvCart.DataSource = null;
-           // dgvCart.DataSource = new BindingList<OrderItem>(cartItemsList);
 
+            var cartItemsList = cartItems.Values.ToList();
+            dgvCart.DataSource = cartItemsList;
           
             CalculateTotals();
             
@@ -109,6 +108,8 @@ namespace CafeBillingSystem.PresentationLayer
 
         private void InitializeComponents()
         {
+            //Items
+
             dgvItems.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
 
             dgvItems.AutoGenerateColumns = false;
@@ -117,7 +118,7 @@ namespace CafeBillingSystem.PresentationLayer
             dgvItems.Columns.Add(new DataGridViewTextBoxColumn
             {
                 DataPropertyName = "Id",
-                HeaderText = "ID",
+                HeaderText = "Id",
                 Name = "Id",
                 Visible = false
             });
@@ -147,9 +148,51 @@ namespace CafeBillingSystem.PresentationLayer
                 Text = "Sell",
                 UseColumnTextForButtonValue = true,
             });
-            
+
+            //Cart
+
+            dgvCart.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgvCart.AutoGenerateColumns = false;
+            dgvCart.Columns.Clear();
 
 
+            dgvCart.Columns.Add(new DataGridViewTextBoxColumn
+            {
+                DataPropertyName = "ItemId",
+                HeaderText = "Id",
+                Name = "Id",
+                Visible = false
+            });
+
+            dgvCart.Columns.Add(new DataGridViewTextBoxColumn 
+            {
+                DataPropertyName = "Name",
+                Name = "Name",
+                HeaderText = "Name"    
+            });
+
+            dgvCart.Columns.Add(new DataGridViewTextBoxColumn
+            {
+                DataPropertyName = "Price",
+                Name = "Price",
+                HeaderText = "Price"
+                
+            });
+
+            dgvCart.Columns.Add(new DataGridViewTextBoxColumn
+            {
+                DataPropertyName = "Quantity",
+                Name = "Quantity",
+                HeaderText = "Quantity"
+            });
+
+            dgvCart.Columns.Add(new DataGridViewButtonColumn
+            {
+                Name = "Remove",
+                HeaderText = "Remove",
+                Text = "Remove",
+                UseColumnTextForButtonValue = true,
+            });
         }
 
         private void OrderForm_FormClosing(object sender, FormClosingEventArgs e)
@@ -190,6 +233,26 @@ namespace CafeBillingSystem.PresentationLayer
         {
             cartItems.Clear();
             UpdateCartView();
+        }
+
+        private void dgvCart_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+                if (e.ColumnIndex == dgvCart.Columns["Remove"].Index)
+                {
+                  
+                    
+                    var itemId = (int)dgvCart.Rows[e.RowIndex].Cells["Id"].Value;
+                    MessageBox.Show(itemId.ToString());
+                    if (cartItems.ContainsKey(itemId))
+                    {
+                        cartItems.Remove(itemId);
+                        UpdateCartView();
+                    }
+                  
+                }
+            }
         }
     }
 }
