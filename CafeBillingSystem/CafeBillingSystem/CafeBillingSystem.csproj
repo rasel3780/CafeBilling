@@ -58,7 +58,8 @@
   <ItemGroup>
     <Compile Include="DataAccessLayer\ApplicationDbContext\CafeDbContext.cs" />
     <Compile Include="DataAccessLayer\Entities\Item.cs" />
-    <Compile Include="DataAccessLayer\Entities\OrderItem.cs" />
+    <Compile Include="DataAccessLayer\Entities\Order.cs" />
+    <Compile Include="DataAccessLayer\Entities\OrderDetail.cs" />
     <Compile Include="DataAccessLayer\Entities\User.cs" />
     <Compile Include="DataAccessLayer\Repositories\IRepository.cs" />
     <Compile Include="DataAccessLayer\Repositories\ItemRepository.cs" />
@@ -70,6 +71,10 @@
     <Compile Include="Migrations\202407301752003_AddItem.cs" />
     <Compile Include="Migrations\202407301752003_AddItem.Designer.cs">
       <DependentUpon>202407301752003_AddItem.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202408201805126_AddOrderDetails.cs" />
+    <Compile Include="Migrations\202408201805126_AddOrderDetails.Designer.cs">
+      <DependentUpon>202408201805126_AddOrderDetails.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="PresentationLayer\AddCategoryForm.cs">
@@ -133,6 +138,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202407301752003_AddItem.resx">
       <DependentUpon>202407301752003_AddItem.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202408201805126_AddOrderDetails.resx">
+      <DependentUpon>202408201805126_AddOrderDetails.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\AddCategoryForm.resx">
       <DependentUpon>AddCategoryForm.cs</DependentUpon>

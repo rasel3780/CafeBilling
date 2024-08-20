@@ -13,10 +13,28 @@ namespace CafeBillingSystem.DataAccessLayer.ApplicationDbContext
     {
         public DbSet<User> Users { get; set; }
         public DbSet<Item> Items { get; set; }
+        public DbSet<Order> Orders { get; set; }
+        public DbSet<OrderDetail> OrderDetails { get; set; }
+
 
         public CafeDbContext():base("CafeDbConnection")
         {
             Database.SetInitializer(new CafeDbInitializer());
+        }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<OrderDetail>()
+               .HasRequired(od => od.Order)
+               .WithMany(o => o.Items)
+               .HasForeignKey(od => od.OrderId);
+
+            modelBuilder.Entity<OrderDetail>()
+                        .HasRequired(od => od.Item)
+                        .WithMany()
+                        .HasForeignKey(od => od.ItemId);
+
+            base.OnModelCreating(modelBuilder);
         }
     }
 

@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Printing;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -18,7 +19,9 @@ namespace CafeBillingSystem.PresentationLayer
     {
         private readonly User _loggedInUser;
         private readonly Repository<Item> _itemRepository;
-        private Dictionary<int, OrderItem> cartItems = new Dictionary<int, OrderItem>();
+        private readonly Repository<Order> _orderRepository;
+        private readonly Repository<OrderDetail> _orderDetailRepository;
+        private Dictionary<int, OrderDetail> cartItems = new Dictionary<int, OrderDetail>();
 
         private decimal subtotal = 0m;
         private decimal vatRate = 0.13m; //13% vat
@@ -31,6 +34,8 @@ namespace CafeBillingSystem.PresentationLayer
         {
             InitializeComponent();
             var context = new CafeDbContext();
+            _orderRepository = new Repository<Order>(context);
+            _orderDetailRepository = new Repository<OrderDetail>(context);
             _itemRepository = new Repository<Item>(context);
             _loggedInUser = user;
            
@@ -66,7 +71,7 @@ namespace CafeBillingSystem.PresentationLayer
             }
             else
             {
-                cartItems[item.Id] = new OrderItem
+                cartItems[item.Id] = new OrderDetail
                 {
                     ItemId = item.Id,
                     Name = item.Name,
@@ -253,6 +258,100 @@ namespace CafeBillingSystem.PresentationLayer
                   
                 }
             }
+        }
+
+        private void btnOrder_Click(object sender, EventArgs e)
+        {
+            var result = MessageBox.Show("Are you sure you want to confirm the order?",
+                 "Confirm Order", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            if (result == DialogResult.Yes)
+            {
+                GenerateBill();
+                SaveOrder();
+                MessageBox.Show("Order Confirmed");
+            }
+        }
+
+        private void SaveOrder()
+        {
+            var order = new Order
+            {
+                OrderDate = DateTime.Now,
+                ServedBy = _loggedInUser.Username,
+                SubTotal = subtotal,
+                Vat = subtotal * vatRate,
+                Discount = subtotal * discountRate,
+                Total = (subtotal + (subtotal * vatRate) - (subtotal * discountRate)),
+                TokenNumber = GetNextTokenNumber()
+
+            };
+            _orderRepository.Add(order);
+
+            foreach(var detail in cartItems.Values)
+            {
+                detail.OrderId = order.OrderId;
+                _orderDetailRepository.Add(detail);
+            }
+
+            
+        }
+        private int GetNextTokenNumber()
+        {
+            var today = DateTime.Today;
+            var lastOrder = _orderRepository
+                            .GetAll()
+                            .Where(o => o.OrderDate >= today)
+                            .OrderByDescending(o => o.TokenNumber)
+                            .FirstOrDefault();
+
+            int nextTokenNumber = 1;
+
+            if (lastOrder != null)
+            {
+                nextTokenNumber = lastOrder.TokenNumber + 1;
+            }
+
+            return nextTokenNumber;
+        }
+
+        private void GenerateBill()
+        {
+            PrintDocument printDocument = new PrintDocument();
+            printDocument.PrintPage += new PrintPageEventHandler(printDocument_PrintPage);
+            PrintPreviewDialog printPreviewDialog = new PrintPreviewDialog
+            {
+                Document = printDocument,
+                Width = 800,
+                Height = 600
+            };
+            printPreviewDialog.ShowDialog();
+        }
+
+        private void printDocument_PrintPage(object sender, PrintPageEventArgs e)
+        {
+            StringBuilder billDetails = new StringBuilder();
+            billDetails.AppendLine("----- Cafe Billing System -----");
+            billDetails.AppendLine("Date: " + DateTime.Now.ToString("dd-MM-yyyy"));
+            billDetails.AppendLine("Time: " + DateTime.Now.ToString("hh:mm tt"));
+            billDetails.AppendLine("Served By: " + _loggedInUser.Username);
+            billDetails.AppendLine("==================================");
+
+            foreach (var item in cartItems.Values)
+            {
+                billDetails.AppendLine($"{item.Name} - {item.Quantity} x {item.Price:C} = {item.Total:C}");
+            }
+
+            billDetails.AppendLine("==================================");
+            billDetails.AppendLine($"Subtotal: {subtotal:C}");
+            billDetails.AppendLine($"VAT (13%): {subtotal * vatRate:C}");
+            billDetails.AppendLine($"Discount: {subtotal * discountRate:C}");
+            billDetails.AppendLine($"Total: {(subtotal + (subtotal * vatRate) - (subtotal * discountRate)):C}");
+            billDetails.AppendLine("==================================");
+            billDetails.AppendLine("Thank you for your visit!");
+
+            // Draw the bill on the printed page
+            e.Graphics.DrawString(billDetails.ToString(), new Font("Arial", 12), Brushes.Black, new PointF(100, 100));
         }
     }
 }
