@@ -41,6 +41,7 @@ namespace CafeBillingSystem.PresentationLayer
 
             InitializeComponents();
             LoadItems();
+            LoadOrder();
 
         }
 
@@ -61,6 +62,13 @@ namespace CafeBillingSystem.PresentationLayer
 
         }
 
+        private void LoadOrder()
+        {
+            var orders = _orderRepository.GetAll()
+                .OrderByDescending(order=>order.OrderDate)
+                .ToList();
+            dgvOrders.DataSource = orders;
+        }
 
 
         private void AddToCart(Item item)
@@ -222,6 +230,66 @@ namespace CafeBillingSystem.PresentationLayer
                 Text = "Remove",
                 UseColumnTextForButtonValue = true,
             });
+
+            //Orders
+            dgvOrders.AutoGenerateColumns = false;
+            dgvOrders.Columns.Clear();
+            dgvOrders.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+
+
+            dgvOrders.Columns.Add(new DataGridViewTextBoxColumn
+            {
+                DataPropertyName = "OrderId",
+                Name = "Id",
+                HeaderText = "Id",
+                Visible = false
+
+            });
+
+            dgvOrders.Columns.Add(new DataGridViewTextBoxColumn
+            {
+                DataPropertyName = "TokenNumber",
+                Name = "TokenNumber",
+                HeaderText = "Token No",
+                ReadOnly = true
+            });
+
+            dgvOrders.Columns.Add(new DataGridViewTextBoxColumn
+            {
+                DataPropertyName = "ServedBy",
+                Name = "ServedBy",
+                HeaderText = "Served By",
+                ReadOnly = true
+            });
+
+            dgvOrders.Columns.Add(new DataGridViewTextBoxColumn
+            {
+                DataPropertyName = "OrderDate",
+                Name = "Date",
+                HeaderText = "Date",
+                ReadOnly = true
+            });
+
+            dgvOrders.Columns.Add(new DataGridViewTextBoxColumn
+            {
+                DataPropertyName = "Total",
+                Name = "Total",
+                HeaderText = "Total",
+                ReadOnly = true
+
+            });
+
+            dgvOrders.Columns.Add(new DataGridViewButtonColumn
+            {
+                Name = "Details",
+                HeaderText = "See Details",
+                Text = "Details",
+                UseColumnTextForButtonValue = true,
+                ReadOnly = true
+            });
+
+
+
         }
 
         private void OrderForm_FormClosing(object sender, FormClosingEventArgs e)
@@ -260,8 +328,14 @@ namespace CafeBillingSystem.PresentationLayer
 
         private void btnRest_Click(object sender, EventArgs e)
         {
-            cartItems.Clear();
-            UpdateCartView();
+            var result = MessageBox.Show("Rest cart?","Confirm rest!", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if(result == DialogResult.Yes)
+            {
+                cartItems.Clear();
+                UpdateCartView();
+            }
+            
+            
         }
 
         private void dgvCart_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -274,6 +348,7 @@ namespace CafeBillingSystem.PresentationLayer
                 var itemId = (int)dgvCart.Rows[e.RowIndex].Cells["Id"].Value;
                 MessageBox.Show(itemId.ToString());
 
+                
                 if (e.ColumnIndex == dgvCart.Columns["Decrease"].Index)
                 {
                     if (cartItems.ContainsKey(itemId) && cartItems[itemId].Quantity > 1)
@@ -395,6 +470,59 @@ namespace CafeBillingSystem.PresentationLayer
             billDetails.AppendLine("Thank you for your visit!");
 
             e.Graphics.DrawString(billDetails.ToString(), new Font("Arial", 12), Brushes.Black, new PointF(100, 100));
+        }
+
+        private void dgvCart_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        {
+            if(e.RowIndex>=0 && e.ColumnIndex == dgvCart.Columns["Quantity"].Index)
+            {
+                var itemId = (int)dgvCart.Rows[e.RowIndex].Cells["Id"].Value;
+                int newQuantity;
+
+                if (int.TryParse(dgvCart.Rows[e.RowIndex].Cells["Quantity"].Value.ToString(), out newQuantity))
+                {
+                    if (newQuantity > 0 && cartItems.ContainsKey(itemId))
+                    {
+                        cartItems[itemId].Quantity = newQuantity;
+                        UpdateCartView();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Quantity Must be greater than 0.");
+                        dgvCart.Rows[e.RowIndex].Cells["Quantity"].Value = cartItems[itemId].Quantity;
+
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Please enter a valid number");
+                    dgvCart.Rows[e.RowIndex].Cells["Quantity"].Value = cartItems[itemId].Quantity;
+
+                }
+            }
+        }
+
+        private void dgvOrders_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0 && e.ColumnIndex == dgvOrders.Columns["Details"].Index)
+            {
+                var orderId = (int)dgvOrders.Rows[e.RowIndex].Cells["Id"].Value;
+
+                var orderDetails = _orderDetailRepository
+                                    .GetAll()
+                                    .Where(detail => detail.OrderId == orderId)
+                                    .ToList();
+
+                if (orderDetails != null && orderDetails.Count > 0)
+                {
+                    var orderDetailsForm = new OrderDetailsForm(orderDetails);
+                    orderDetailsForm.ShowDialog();
+                }
+                else
+                {
+                    MessageBox.Show("No details found for the selected order.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
         }
     }
 }
