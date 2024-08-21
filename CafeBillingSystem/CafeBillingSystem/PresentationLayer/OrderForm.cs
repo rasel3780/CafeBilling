@@ -38,7 +38,7 @@ namespace CafeBillingSystem.PresentationLayer
             _orderDetailRepository = new Repository<OrderDetail>(context);
             _itemRepository = new Repository<Item>(context);
             _loggedInUser = user;
-           
+
             InitializeComponents();
             LoadItems();
 
@@ -58,7 +58,7 @@ namespace CafeBillingSystem.PresentationLayer
         {
             var items = _itemRepository.GetAll();
             dgvItems.DataSource = items;
-            
+
         }
 
 
@@ -79,9 +79,9 @@ namespace CafeBillingSystem.PresentationLayer
                     Quantity = 1
                 };
             }
-            foreach(var foodItem in  cartItems)
+            foreach (var foodItem in cartItems)
             {
-                MessageBox.Show("Key:"+foodItem.Key.ToString()+":"+foodItem.Value.Name+"-Quantity:"+foodItem.Value.Quantity.ToString()+"-id:"+foodItem.Value.ItemId);
+                MessageBox.Show("Key:" + foodItem.Key.ToString() + ":" + foodItem.Value.Name + "-Quantity:" + foodItem.Value.Quantity.ToString() + "-id:" + foodItem.Value.ItemId);
             }
             UpdateCartView();
         }
@@ -92,15 +92,15 @@ namespace CafeBillingSystem.PresentationLayer
 
             var cartItemsList = cartItems.Values.ToList();
             dgvCart.DataSource = cartItemsList;
-          
+
             CalculateTotals();
-            
+
 
         }
 
         private void CalculateTotals()
         {
-            subtotal = cartItems.Values.Sum(item=>item.Total);
+            subtotal = cartItems.Values.Sum(item => item.Total);
             decimal vat = subtotal * vatRate;
             decimal discount = subtotal * discountRate;
             decimal total = subtotal + vat - discount;
@@ -131,19 +131,22 @@ namespace CafeBillingSystem.PresentationLayer
             {
                 DataPropertyName = "Name",
                 HeaderText = "Name",
-                Name = "Name"
+                Name = "Name",
+                ReadOnly = true
             });
             dgvItems.Columns.Add(new DataGridViewTextBoxColumn
             {
                 DataPropertyName = "Price",
                 HeaderText = "Price",
-                Name = "Price"
+                Name = "Price",
+                ReadOnly = true
             });
             dgvItems.Columns.Add(new DataGridViewTextBoxColumn
             {
                 DataPropertyName = "Category",
                 HeaderText = "Category",
-                Name = "Category"
+                Name = "Category",
+                ReadOnly = true
             });
 
             dgvItems.Columns.Add(new DataGridViewButtonColumn
@@ -152,6 +155,7 @@ namespace CafeBillingSystem.PresentationLayer
                 HeaderText = "Sell",
                 Text = "Sell",
                 UseColumnTextForButtonValue = true,
+                ReadOnly = true
             });
 
             //Cart
@@ -169,19 +173,30 @@ namespace CafeBillingSystem.PresentationLayer
                 Visible = false
             });
 
-            dgvCart.Columns.Add(new DataGridViewTextBoxColumn 
+            dgvCart.Columns.Add(new DataGridViewTextBoxColumn
             {
                 DataPropertyName = "Name",
                 Name = "Name",
-                HeaderText = "Name"    
+                HeaderText = "Name",
+                ReadOnly = true
             });
 
             dgvCart.Columns.Add(new DataGridViewTextBoxColumn
             {
                 DataPropertyName = "Price",
                 Name = "Price",
-                HeaderText = "Price"
-                
+                HeaderText = "Price",
+                ReadOnly = true
+
+            });
+
+            dgvCart.Columns.Add(new DataGridViewButtonColumn
+            {
+                Name = "Decrease",
+                HeaderText = "",
+                Text = "-",
+                UseColumnTextForButtonValue = true,
+
             });
 
             dgvCart.Columns.Add(new DataGridViewTextBoxColumn
@@ -190,6 +205,15 @@ namespace CafeBillingSystem.PresentationLayer
                 Name = "Quantity",
                 HeaderText = "Quantity"
             });
+
+            dgvCart.Columns.Add(new DataGridViewButtonColumn
+            {
+                Name = "Increase",
+                HeaderText = "",
+                Text = "+",
+                UseColumnTextForButtonValue = true
+            });
+
 
             dgvCart.Columns.Add(new DataGridViewButtonColumn
             {
@@ -207,18 +231,18 @@ namespace CafeBillingSystem.PresentationLayer
 
         private void OrderForm_Load(object sender, EventArgs e)
         {
-           
+
 
         }
 
 
-       
+
 
         private void dgvItems_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0)
             {
-               
+
                 if (e.ColumnIndex == dgvItems.Columns["Sell"].Index)
                 {
                     var itemId = (int)dgvItems.Rows[e.RowIndex].Cells["Id"].Value;
@@ -230,7 +254,7 @@ namespace CafeBillingSystem.PresentationLayer
                         AddToCart(item);
                     }
                 }
-                
+
             }
         }
 
@@ -244,19 +268,39 @@ namespace CafeBillingSystem.PresentationLayer
         {
             if (e.RowIndex >= 0)
             {
-                if (e.ColumnIndex == dgvCart.Columns["Remove"].Index)
+
+
+
+                var itemId = (int)dgvCart.Rows[e.RowIndex].Cells["Id"].Value;
+                MessageBox.Show(itemId.ToString());
+
+                if (e.ColumnIndex == dgvCart.Columns["Decrease"].Index)
                 {
-                  
-                    
-                    var itemId = (int)dgvCart.Rows[e.RowIndex].Cells["Id"].Value;
-                    MessageBox.Show(itemId.ToString());
+                    if (cartItems.ContainsKey(itemId) && cartItems[itemId].Quantity > 1)
+                    {
+                        cartItems[itemId].Quantity--;
+                        UpdateCartView();
+                    }
+                }
+                else if (e.ColumnIndex == dgvCart.Columns["Increase"].Index)
+                {
+                    if(cartItems.ContainsKey(itemId))
+                    {
+                        cartItems[itemId].Quantity++;
+                        UpdateCartView();
+                    }
+                }
+                else if (e.ColumnIndex == dgvCart.Columns["Remove"].Index)
+                {
                     if (cartItems.ContainsKey(itemId))
                     {
                         cartItems.Remove(itemId);
                         UpdateCartView();
                     }
-                  
                 }
+
+
+
             }
         }
 
@@ -288,13 +332,13 @@ namespace CafeBillingSystem.PresentationLayer
             };
             _orderRepository.Add(order);
 
-            foreach(var detail in cartItems.Values)
+            foreach (var detail in cartItems.Values)
             {
                 detail.OrderId = order.OrderId;
                 _orderDetailRepository.Add(detail);
             }
 
-            
+
         }
         private int GetNextTokenNumber()
         {
@@ -350,7 +394,6 @@ namespace CafeBillingSystem.PresentationLayer
             billDetails.AppendLine("==================================");
             billDetails.AppendLine("Thank you for your visit!");
 
-            // Draw the bill on the printed page
             e.Graphics.DrawString(billDetails.ToString(), new Font("Arial", 12), Brushes.Black, new PointF(100, 100));
         }
     }
