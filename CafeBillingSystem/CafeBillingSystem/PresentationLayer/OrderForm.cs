@@ -7,6 +7,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Drawing.Printing;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -27,7 +28,10 @@ namespace CafeBillingSystem.PresentationLayer
         private decimal vatRate = 0.13m; //13% vat
         private decimal discountRate = 0.05m; //15% discount
 
+        private string searchBoxPlaceHolder = "Search item by Id, Name, Category.....";
+        private string orderSearchBoxPlaceHolder = "Search order by Order Id, Token Number, Date.....";
 
+        private int tokenNumber;
 
 
         public OrderForm(User user)
@@ -68,6 +72,11 @@ namespace CafeBillingSystem.PresentationLayer
                 .OrderByDescending(order=>order.OrderDate)
                 .ToList();
             dgvOrders.DataSource = orders;
+        }
+
+        private void AddSearchBox()
+        {
+            
         }
 
 
@@ -133,7 +142,7 @@ namespace CafeBillingSystem.PresentationLayer
                 DataPropertyName = "Id",
                 HeaderText = "Id",
                 Name = "Id",
-                Visible = false
+                ReadOnly = true
             });
             dgvItems.Columns.Add(new DataGridViewTextBoxColumn
             {
@@ -242,7 +251,7 @@ namespace CafeBillingSystem.PresentationLayer
                 DataPropertyName = "OrderId",
                 Name = "Id",
                 HeaderText = "Id",
-                Visible = false
+                ReadOnly = true
 
             });
 
@@ -299,8 +308,8 @@ namespace CafeBillingSystem.PresentationLayer
 
         private void OrderForm_Load(object sender, EventArgs e)
         {
-
-
+            txtBoxSearchItem.ForeColor = Color.Gray;
+            OrderSearchBox.ForeColor = Color.Gray;
         }
 
 
@@ -386,14 +395,18 @@ namespace CafeBillingSystem.PresentationLayer
 
             if (result == DialogResult.Yes)
             {
-                GenerateBill();
                 SaveOrder();
+                GenerateBill();
+                cartItems.Clear();
+                UpdateCartView();
                 MessageBox.Show("Order Confirmed");
+                LoadOrder();
             }
         }
 
         private void SaveOrder()
         {
+            tokenNumber = GetNextTokenNumber();
             var order = new Order
             {
                 OrderDate = DateTime.Now,
@@ -402,7 +415,7 @@ namespace CafeBillingSystem.PresentationLayer
                 Vat = subtotal * vatRate,
                 Discount = subtotal * discountRate,
                 Total = (subtotal + (subtotal * vatRate) - (subtotal * discountRate)),
-                TokenNumber = GetNextTokenNumber()
+                TokenNumber = tokenNumber
 
             };
             _orderRepository.Add(order);
@@ -449,8 +462,10 @@ namespace CafeBillingSystem.PresentationLayer
 
         private void printDocument_PrintPage(object sender, PrintPageEventArgs e)
         {
+           
             StringBuilder billDetails = new StringBuilder();
             billDetails.AppendLine("----- Cafe Billing System -----");
+            billDetails.AppendLine("Token Number: " + tokenNumber.ToString());
             billDetails.AppendLine("Date: " + DateTime.Now.ToString("dd-MM-yyyy"));
             billDetails.AppendLine("Time: " + DateTime.Now.ToString("hh:mm tt"));
             billDetails.AppendLine("Served By: " + _loggedInUser.Username);
@@ -458,14 +473,14 @@ namespace CafeBillingSystem.PresentationLayer
 
             foreach (var item in cartItems.Values)
             {
-                billDetails.AppendLine($"{item.Name} - {item.Quantity} x {item.Price:C} = {item.Total:C}");
+                billDetails.AppendLine($"{item.Name} - {item.Quantity} x {item.Price.ToString("C", new CultureInfo("bn-BD"))} = {item.Total.ToString("C", new CultureInfo("bn-BD"))}");
             }
 
             billDetails.AppendLine("==================================");
-            billDetails.AppendLine($"Subtotal: {subtotal:C}");
-            billDetails.AppendLine($"VAT (13%): {subtotal * vatRate:C}");
-            billDetails.AppendLine($"Discount: {subtotal * discountRate:C}");
-            billDetails.AppendLine($"Total: {(subtotal + (subtotal * vatRate) - (subtotal * discountRate)):C}");
+            billDetails.AppendLine($"Subtotal: {subtotal.ToString("C", new CultureInfo("bn-BD"))}");
+            billDetails.AppendLine($"VAT (13%): {(subtotal * vatRate).ToString("C", new CultureInfo("bn-BD"))}");
+            billDetails.AppendLine($"Discount: {(subtotal * discountRate).ToString("C", new CultureInfo("bn-BD"))}");
+            billDetails.AppendLine($"Total: {(subtotal + (subtotal * vatRate) - (subtotal * discountRate)).ToString("C", new CultureInfo("bn-BD"))}");
             billDetails.AppendLine("==================================");
             billDetails.AppendLine("Thank you for your visit!");
 
@@ -523,6 +538,94 @@ namespace CafeBillingSystem.PresentationLayer
                     MessageBox.Show("No details found for the selected order.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
+        }
+
+        private void btnClearSearch_Click(object sender, EventArgs e)
+        {
+            txtBoxSearchItem.Clear();
+            txtBoxSearchItem.Text = searchBoxPlaceHolder;
+            LoadItems();
+
+        }
+
+        private void mainPanel_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void txtBoxSearchItem_Enter(object sender, EventArgs e)
+        {
+            if(txtBoxSearchItem.Text == searchBoxPlaceHolder)
+            {
+                txtBoxSearchItem.Text = "";
+                txtBoxSearchItem.ForeColor = Color.Black;
+            }
+        }
+
+        private void txtBoxSearchItem_Leave(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(txtBoxSearchItem.Text))
+            {
+                txtBoxSearchItem.Text = searchBoxPlaceHolder;
+                txtBoxSearchItem.ForeColor = Color.Gray;
+                dgvItems.DataSource = _itemRepository.GetAll() ;
+            }
+        }
+
+        private void txtBoxSearchItem_TextChanged(object sender, EventArgs e)
+        {
+            string searchItem = ((TextBox)sender).Text.Trim().ToLower();
+
+            var filteredItems = _itemRepository.GetAll()
+                    .Where(item =>
+                        item.Id.ToString().Contains(searchItem) ||
+                        item.Name.ToLower().Contains(searchItem.ToLower()) ||
+                        item.Category.ToLower().Contains(searchItem.ToLower()))
+                    .ToList();
+
+            dgvItems.DataSource = filteredItems;
+        }
+
+        private void btnClearOrderSearchBox_Click(object sender, EventArgs e)
+        {
+            OrderSearchBox.Clear();
+            OrderSearchBox.Text = orderSearchBoxPlaceHolder;
+            LoadOrder();
+        }
+
+        private void OrderSearchBox_Leave(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(OrderSearchBox.Text))
+            {
+                OrderSearchBox.Text = orderSearchBoxPlaceHolder;
+                OrderSearchBox.ForeColor = Color.Gray;
+                LoadOrder(); 
+            }
+        }
+
+        private void OrderSearchBox_Enter(object sender, EventArgs e)
+        {
+            if (OrderSearchBox.Text == orderSearchBoxPlaceHolder)
+            {
+                OrderSearchBox.Text = "";
+                OrderSearchBox.ForeColor = Color.Black;
+                LoadOrder();
+            }
+        }
+
+        private void OrderSearchBox_TextChanged(object sender, EventArgs e)
+        {
+            string searchOrder = ((TextBox)sender).Text.Trim().ToLower();   
+            
+            var filterOrder = _orderRepository.GetAll()
+                                .Where(order=>
+                                    order.OrderId.ToString().Contains(searchOrder)||
+                                    order.ServedBy.ToLower().Contains(searchOrder)||
+                                    order.TokenNumber.ToString().Contains(searchOrder)||
+                                    order.OrderDate.ToString().Contains(searchOrder))
+                                .ToList();  
+
+            dgvOrders.DataSource = filterOrder;
         }
     }
 }

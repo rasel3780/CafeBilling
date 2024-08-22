@@ -40,23 +40,35 @@
             this.lblDiscount = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.lblTotal = new System.Windows.Forms.Label();
-            this.dgvItems = new System.Windows.Forms.DataGridView();
             this.dgvCart = new System.Windows.Forms.DataGridView();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.btnRest = new System.Windows.Forms.Button();
             this.btnOrder = new System.Windows.Forms.Button();
-            this.printDocument = new System.Drawing.Printing.PrintDocument();
+            this.btnRest = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.dgvOrders = new System.Windows.Forms.DataGridView();
+            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+            this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
+            this.txtBoxSearchItem = new System.Windows.Forms.TextBox();
+            this.btnClearSearch = new System.Windows.Forms.Button();
+            this.dgvItems = new System.Windows.Forms.DataGridView();
+            this.printDocument = new System.Drawing.Printing.PrintDocument();
+            this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
+            this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
+            this.btnClearOrderSearchBox = new System.Windows.Forms.Button();
+            this.OrderSearchBox = new System.Windows.Forms.TextBox();
             this.mainPanel.SuspendLayout();
             this.mainTableLayoutPanel.SuspendLayout();
             this.summeryTableLayoutPanel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvItems)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCart)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvOrders)).BeginInit();
+            this.tableLayoutPanel2.SuspendLayout();
+            this.tableLayoutPanel3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvItems)).BeginInit();
+            this.tableLayoutPanel4.SuspendLayout();
+            this.tableLayoutPanel5.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnLogout
@@ -65,7 +77,7 @@
             this.btnLogout.BackColor = System.Drawing.Color.Red;
             this.btnLogout.Font = new System.Drawing.Font("Microsoft YaHei UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnLogout.ForeColor = System.Drawing.SystemColors.HighlightText;
-            this.btnLogout.Location = new System.Drawing.Point(1176, 589);
+            this.btnLogout.Location = new System.Drawing.Point(1138, 589);
             this.btnLogout.Name = "btnLogout";
             this.btnLogout.Size = new System.Drawing.Size(88, 31);
             this.btnLogout.TabIndex = 1;
@@ -83,38 +95,40 @@
             this.mainPanel.Controls.Add(this.mainTableLayoutPanel);
             this.mainPanel.Location = new System.Drawing.Point(5, 5);
             this.mainPanel.Name = "mainPanel";
-            this.mainPanel.Size = new System.Drawing.Size(1278, 625);
+            this.mainPanel.Size = new System.Drawing.Size(1240, 625);
             this.mainPanel.TabIndex = 2;
+            this.mainPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.mainPanel_Paint);
             // 
             // mainTableLayoutPanel
             // 
             this.mainTableLayoutPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.mainTableLayoutPanel.BackColor = System.Drawing.Color.White;
             this.mainTableLayoutPanel.ColumnCount = 2;
-            this.mainTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.mainTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.mainTableLayoutPanel.Controls.Add(this.summeryTableLayoutPanel, 1, 3);
+            this.mainTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 48.54369F));
+            this.mainTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 24.18953F));
             this.mainTableLayoutPanel.Controls.Add(this.dgvCart, 1, 1);
             this.mainTableLayoutPanel.Controls.Add(this.tableLayoutPanel1, 1, 2);
-            this.mainTableLayoutPanel.Controls.Add(this.dgvItems, 0, 1);
             this.mainTableLayoutPanel.Controls.Add(this.label4, 0, 0);
             this.mainTableLayoutPanel.Controls.Add(this.label5, 1, 0);
             this.mainTableLayoutPanel.Controls.Add(this.label6, 0, 2);
-            this.mainTableLayoutPanel.Controls.Add(this.dgvOrders, 0, 3);
+            this.mainTableLayoutPanel.Controls.Add(this.tableLayoutPanel2, 0, 1);
+            this.mainTableLayoutPanel.Controls.Add(this.tableLayoutPanel4, 0, 3);
+            this.mainTableLayoutPanel.Controls.Add(this.summeryTableLayoutPanel, 1, 3);
             this.mainTableLayoutPanel.Location = new System.Drawing.Point(23, 20);
             this.mainTableLayoutPanel.Name = "mainTableLayoutPanel";
             this.mainTableLayoutPanel.RowCount = 4;
-            this.mainTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 5.27904F));
-            this.mainTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 48.00832F));
-            this.mainTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 7.992895F));
-            this.mainTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 39.07638F));
-            this.mainTableLayoutPanel.Size = new System.Drawing.Size(1241, 563);
+            this.mainTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 5.260281F));
+            this.mainTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 47.83772F));
+            this.mainTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 7.815275F));
+            this.mainTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 39.43162F));
+            this.mainTableLayoutPanel.Size = new System.Drawing.Size(1203, 563);
             this.mainTableLayoutPanel.TabIndex = 0;
             // 
             // summeryTableLayoutPanel
             // 
-            this.summeryTableLayoutPanel.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.summeryTableLayoutPanel.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.summeryTableLayoutPanel.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.InsetDouble;
             this.summeryTableLayoutPanel.ColumnCount = 2;
             this.summeryTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 43.89027F));
@@ -128,14 +142,14 @@
             this.summeryTableLayoutPanel.Controls.Add(this.label7, 0, 3);
             this.summeryTableLayoutPanel.Controls.Add(this.lblTotal, 1, 3);
             this.summeryTableLayoutPanel.Font = new System.Drawing.Font("Microsoft YaHei UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.summeryTableLayoutPanel.Location = new System.Drawing.Point(728, 394);
+            this.summeryTableLayoutPanel.Location = new System.Drawing.Point(805, 399);
             this.summeryTableLayoutPanel.Name = "summeryTableLayoutPanel";
             this.summeryTableLayoutPanel.RowCount = 4;
-            this.summeryTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 54.83871F));
-            this.summeryTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 45.16129F));
-            this.summeryTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
-            this.summeryTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.summeryTableLayoutPanel.Size = new System.Drawing.Size(404, 117);
+            this.summeryTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 46.25F));
+            this.summeryTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 53.75F));
+            this.summeryTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 33F));
+            this.summeryTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 38F));
+            this.summeryTableLayoutPanel.Size = new System.Drawing.Size(395, 161);
             this.summeryTableLayoutPanel.TabIndex = 2;
             // 
             // label1
@@ -152,7 +166,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Cambria", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(6, 34);
+            this.label2.Location = new System.Drawing.Point(6, 40);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(89, 20);
             this.label2.TabIndex = 1;
@@ -162,7 +176,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Cambria", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(6, 60);
+            this.label3.Location = new System.Drawing.Point(6, 83);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(123, 20);
             this.label3.TabIndex = 2;
@@ -171,7 +185,7 @@
             // lblSubtotal
             // 
             this.lblSubtotal.AutoSize = true;
-            this.lblSubtotal.Location = new System.Drawing.Point(182, 3);
+            this.lblSubtotal.Location = new System.Drawing.Point(178, 3);
             this.lblSubtotal.Name = "lblSubtotal";
             this.lblSubtotal.Size = new System.Drawing.Size(34, 23);
             this.lblSubtotal.TabIndex = 3;
@@ -180,7 +194,7 @@
             // lblVat
             // 
             this.lblVat.AutoSize = true;
-            this.lblVat.Location = new System.Drawing.Point(182, 34);
+            this.lblVat.Location = new System.Drawing.Point(178, 40);
             this.lblVat.Name = "lblVat";
             this.lblVat.Size = new System.Drawing.Size(35, 23);
             this.lblVat.TabIndex = 4;
@@ -189,7 +203,7 @@
             // lblDiscount
             // 
             this.lblDiscount.AutoSize = true;
-            this.lblDiscount.Location = new System.Drawing.Point(182, 60);
+            this.lblDiscount.Location = new System.Drawing.Point(178, 83);
             this.lblDiscount.Name = "lblDiscount";
             this.lblDiscount.Size = new System.Drawing.Size(35, 23);
             this.lblDiscount.TabIndex = 5;
@@ -199,7 +213,7 @@
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Cambria", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(6, 93);
+            this.label7.Location = new System.Drawing.Point(6, 119);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(49, 20);
             this.label7.TabIndex = 2;
@@ -208,35 +222,21 @@
             // lblTotal
             // 
             this.lblTotal.AutoSize = true;
-            this.lblTotal.Location = new System.Drawing.Point(182, 93);
+            this.lblTotal.Location = new System.Drawing.Point(178, 119);
             this.lblTotal.Name = "lblTotal";
-            this.lblTotal.Size = new System.Drawing.Size(34, 21);
+            this.lblTotal.Size = new System.Drawing.Size(34, 23);
             this.lblTotal.TabIndex = 2;
             this.lblTotal.Text = "0.0";
-            // 
-            // dgvItems
-            // 
-            this.dgvItems.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.dgvItems.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvItems.Location = new System.Drawing.Point(3, 32);
-            this.dgvItems.Name = "dgvItems";
-            this.dgvItems.RowHeadersWidth = 51;
-            this.dgvItems.RowTemplate.Height = 24;
-            this.dgvItems.Size = new System.Drawing.Size(614, 263);
-            this.dgvItems.TabIndex = 3;
-            this.dgvItems.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvItems_CellContentClick);
             // 
             // dgvCart
             // 
             this.dgvCart.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvCart.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvCart.Location = new System.Drawing.Point(623, 32);
+            this.dgvCart.Location = new System.Drawing.Point(805, 32);
             this.dgvCart.Name = "dgvCart";
             this.dgvCart.RowHeadersWidth = 51;
             this.dgvCart.RowTemplate.Height = 24;
-            this.dgvCart.Size = new System.Drawing.Size(615, 263);
+            this.dgvCart.Size = new System.Drawing.Size(395, 262);
             this.dgvCart.TabIndex = 5;
             this.dgvCart.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCart_CellContentClick);
             this.dgvCart.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCart_CellEndEdit);
@@ -250,12 +250,25 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 46.51163F));
             this.tableLayoutPanel1.Controls.Add(this.btnOrder, 2, 0);
             this.tableLayoutPanel1.Controls.Add(this.btnRest, 0, 0);
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(715, 301);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(805, 300);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(430, 38);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(395, 37);
             this.tableLayoutPanel1.TabIndex = 6;
+            // 
+            // btnOrder
+            // 
+            this.btnOrder.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            this.btnOrder.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnOrder.Font = new System.Drawing.Font("Microsoft YaHei UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnOrder.Location = new System.Drawing.Point(213, 3);
+            this.btnOrder.Name = "btnOrder";
+            this.btnOrder.Size = new System.Drawing.Size(179, 31);
+            this.btnOrder.TabIndex = 5;
+            this.btnOrder.Text = "Confirm Order";
+            this.btnOrder.UseVisualStyleBackColor = false;
+            this.btnOrder.Click += new System.EventHandler(this.btnOrder_Click);
             // 
             // btnRest
             // 
@@ -265,36 +278,22 @@
             this.btnRest.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.btnRest.Location = new System.Drawing.Point(3, 3);
             this.btnRest.Name = "btnRest";
-            this.btnRest.Size = new System.Drawing.Size(191, 32);
+            this.btnRest.Size = new System.Drawing.Size(175, 31);
             this.btnRest.TabIndex = 4;
             this.btnRest.Text = "Reset";
             this.btnRest.UseVisualStyleBackColor = false;
             this.btnRest.Click += new System.EventHandler(this.btnRest_Click);
             // 
-            // btnOrder
-            // 
-            this.btnOrder.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
-            this.btnOrder.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnOrder.Font = new System.Drawing.Font("Microsoft YaHei UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnOrder.Location = new System.Drawing.Point(232, 3);
-            this.btnOrder.Name = "btnOrder";
-            this.btnOrder.Size = new System.Drawing.Size(195, 32);
-            this.btnOrder.TabIndex = 5;
-            this.btnOrder.Text = "Confirm Order";
-            this.btnOrder.UseVisualStyleBackColor = false;
-            this.btnOrder.Click += new System.EventHandler(this.btnOrder_Click);
-            // 
-            // printDocument
-            // 
-            this.printDocument.PrintPage += new System.Drawing.Printing.PrintPageEventHandler(this.printDocument_PrintPage);
-            // 
             // label4
             // 
             this.label4.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(290, 6);
+            this.label4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
+            this.label4.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.ForeColor = System.Drawing.Color.White;
+            this.label4.Location = new System.Drawing.Point(376, 5);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(39, 16);
+            this.label4.Size = new System.Drawing.Size(50, 19);
             this.label4.TabIndex = 7;
             this.label4.Text = "Items";
             // 
@@ -302,9 +301,12 @@
             // 
             this.label5.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(915, 6);
+            this.label5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
+            this.label5.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.ForeColor = System.Drawing.Color.White;
+            this.label5.Location = new System.Drawing.Point(981, 5);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(31, 16);
+            this.label5.Size = new System.Drawing.Size(43, 19);
             this.label5.TabIndex = 7;
             this.label5.Text = "Cart";
             // 
@@ -312,9 +314,12 @@
             // 
             this.label6.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(286, 312);
+            this.label6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
+            this.label6.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.ForeColor = System.Drawing.Color.White;
+            this.label6.Location = new System.Drawing.Point(370, 309);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(48, 16);
+            this.label6.Size = new System.Drawing.Size(62, 19);
             this.label6.TabIndex = 7;
             this.label6.Text = "Orders";
             // 
@@ -322,19 +327,147 @@
             // 
             this.dgvOrders.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvOrders.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvOrders.Location = new System.Drawing.Point(3, 345);
+            this.dgvOrders.Location = new System.Drawing.Point(3, 56);
             this.dgvOrders.Name = "dgvOrders";
             this.dgvOrders.RowHeadersWidth = 51;
             this.dgvOrders.RowTemplate.Height = 24;
-            this.dgvOrders.Size = new System.Drawing.Size(614, 215);
+            this.dgvOrders.Size = new System.Drawing.Size(790, 158);
             this.dgvOrders.TabIndex = 8;
             this.dgvOrders.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvOrders_CellContentClick);
+            // 
+            // tableLayoutPanel2
+            // 
+            this.tableLayoutPanel2.ColumnCount = 1;
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel2.Controls.Add(this.tableLayoutPanel3, 0, 0);
+            this.tableLayoutPanel2.Controls.Add(this.dgvItems, 0, 1);
+            this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 32);
+            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
+            this.tableLayoutPanel2.RowCount = 2;
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.73004F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 83.26996F));
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(796, 262);
+            this.tableLayoutPanel2.TabIndex = 9;
+            // 
+            // tableLayoutPanel3
+            // 
+            this.tableLayoutPanel3.ColumnCount = 3;
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 90.9465F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 9.053498F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 99F));
+            this.tableLayoutPanel3.Controls.Add(this.txtBoxSearchItem, 0, 0);
+            this.tableLayoutPanel3.Controls.Add(this.btnClearSearch, 2, 0);
+            this.tableLayoutPanel3.Location = new System.Drawing.Point(3, 3);
+            this.tableLayoutPanel3.Name = "tableLayoutPanel3";
+            this.tableLayoutPanel3.RowCount = 1;
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(569, 36);
+            this.tableLayoutPanel3.TabIndex = 0;
+            // 
+            // txtBoxSearchItem
+            // 
+            this.txtBoxSearchItem.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.txtBoxSearchItem.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtBoxSearchItem.Font = new System.Drawing.Font("Cambria", 7.8F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtBoxSearchItem.Location = new System.Drawing.Point(128, 6);
+            this.txtBoxSearchItem.Name = "txtBoxSearchItem";
+            this.txtBoxSearchItem.Size = new System.Drawing.Size(296, 23);
+            this.txtBoxSearchItem.TabIndex = 0;
+            this.txtBoxSearchItem.Text = "Search item by Id, Name, Category.....";
+            this.txtBoxSearchItem.TextChanged += new System.EventHandler(this.txtBoxSearchItem_TextChanged);
+            this.txtBoxSearchItem.Enter += new System.EventHandler(this.txtBoxSearchItem_Enter);
+            this.txtBoxSearchItem.Leave += new System.EventHandler(this.txtBoxSearchItem_Leave);
+            // 
+            // btnClearSearch
+            // 
+            this.btnClearSearch.BackColor = System.Drawing.Color.Red;
+            this.btnClearSearch.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnClearSearch.Location = new System.Drawing.Point(472, 3);
+            this.btnClearSearch.Name = "btnClearSearch";
+            this.btnClearSearch.Size = new System.Drawing.Size(94, 30);
+            this.btnClearSearch.TabIndex = 1;
+            this.btnClearSearch.Text = "Clear";
+            this.btnClearSearch.UseVisualStyleBackColor = false;
+            this.btnClearSearch.Click += new System.EventHandler(this.btnClearSearch_Click);
+            // 
+            // dgvItems
+            // 
+            this.dgvItems.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvItems.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvItems.Location = new System.Drawing.Point(3, 46);
+            this.dgvItems.Name = "dgvItems";
+            this.dgvItems.RowHeadersWidth = 51;
+            this.dgvItems.RowTemplate.Height = 24;
+            this.dgvItems.Size = new System.Drawing.Size(790, 213);
+            this.dgvItems.TabIndex = 3;
+            this.dgvItems.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvItems_CellContentClick);
+            // 
+            // printDocument
+            // 
+            this.printDocument.PrintPage += new System.Drawing.Printing.PrintPageEventHandler(this.printDocument_PrintPage);
+            // 
+            // tableLayoutPanel4
+            // 
+            this.tableLayoutPanel4.ColumnCount = 1;
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel4.Controls.Add(this.tableLayoutPanel5, 0, 0);
+            this.tableLayoutPanel4.Controls.Add(this.dgvOrders, 0, 1);
+            this.tableLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel4.Location = new System.Drawing.Point(3, 343);
+            this.tableLayoutPanel4.Name = "tableLayoutPanel4";
+            this.tableLayoutPanel4.RowCount = 2;
+            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 24.65116F));
+            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 75.34884F));
+            this.tableLayoutPanel4.Size = new System.Drawing.Size(796, 217);
+            this.tableLayoutPanel4.TabIndex = 10;
+            // 
+            // tableLayoutPanel5
+            // 
+            this.tableLayoutPanel5.ColumnCount = 3;
+            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 92.77899F));
+            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 7.221006F));
+            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 92F));
+            this.tableLayoutPanel5.Controls.Add(this.btnClearOrderSearchBox, 2, 0);
+            this.tableLayoutPanel5.Controls.Add(this.OrderSearchBox, 0, 0);
+            this.tableLayoutPanel5.Location = new System.Drawing.Point(3, 3);
+            this.tableLayoutPanel5.Name = "tableLayoutPanel5";
+            this.tableLayoutPanel5.RowCount = 1;
+            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel5.Size = new System.Drawing.Size(569, 36);
+            this.tableLayoutPanel5.TabIndex = 0;
+            // 
+            // btnClearOrderSearchBox
+            // 
+            this.btnClearOrderSearchBox.BackColor = System.Drawing.Color.Red;
+            this.btnClearOrderSearchBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnClearOrderSearchBox.Location = new System.Drawing.Point(479, 3);
+            this.btnClearOrderSearchBox.Name = "btnClearOrderSearchBox";
+            this.btnClearOrderSearchBox.Size = new System.Drawing.Size(87, 30);
+            this.btnClearOrderSearchBox.TabIndex = 0;
+            this.btnClearOrderSearchBox.Text = "Clear";
+            this.btnClearOrderSearchBox.UseVisualStyleBackColor = false;
+            this.btnClearOrderSearchBox.Click += new System.EventHandler(this.btnClearOrderSearchBox_Click);
+            // 
+            // OrderSearchBox
+            // 
+            this.OrderSearchBox.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.OrderSearchBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.OrderSearchBox.Font = new System.Drawing.Font("Cambria", 7.8F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.OrderSearchBox.Location = new System.Drawing.Point(128, 6);
+            this.OrderSearchBox.Name = "OrderSearchBox";
+            this.OrderSearchBox.Size = new System.Drawing.Size(311, 23);
+            this.OrderSearchBox.TabIndex = 1;
+            this.OrderSearchBox.Text = "Search order by Order Id, Token Number, Date.....";
+            this.OrderSearchBox.TextChanged += new System.EventHandler(this.OrderSearchBox_TextChanged);
+            this.OrderSearchBox.Enter += new System.EventHandler(this.OrderSearchBox_Enter);
+            this.OrderSearchBox.Leave += new System.EventHandler(this.OrderSearchBox_Leave);
             // 
             // OrderForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1288, 634);
+            this.ClientSize = new System.Drawing.Size(1250, 634);
             this.Controls.Add(this.mainPanel);
             this.Name = "OrderForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -346,10 +479,16 @@
             this.mainTableLayoutPanel.PerformLayout();
             this.summeryTableLayoutPanel.ResumeLayout(false);
             this.summeryTableLayoutPanel.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvItems)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCart)).EndInit();
             this.tableLayoutPanel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvOrders)).EndInit();
+            this.tableLayoutPanel2.ResumeLayout(false);
+            this.tableLayoutPanel3.ResumeLayout(false);
+            this.tableLayoutPanel3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvItems)).EndInit();
+            this.tableLayoutPanel4.ResumeLayout(false);
+            this.tableLayoutPanel5.ResumeLayout(false);
+            this.tableLayoutPanel5.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -377,5 +516,13 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.DataGridView dgvOrders;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
+        private System.Windows.Forms.TextBox txtBoxSearchItem;
+        private System.Windows.Forms.Button btnClearSearch;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel4;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel5;
+        private System.Windows.Forms.Button btnClearOrderSearchBox;
+        private System.Windows.Forms.TextBox OrderSearchBox;
     }
 }
