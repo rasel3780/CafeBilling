@@ -58,16 +58,12 @@
   <ItemGroup>
     <Compile Include="DataAccessLayer\ApplicationDbContext\CafeDbContext.cs" />
     <Compile Include="DataAccessLayer\Entities\Item.cs" />
+    <Compile Include="DataAccessLayer\Entities\Order.cs" />
+    <Compile Include="DataAccessLayer\Entities\OrderDetail.cs" />
     <Compile Include="DataAccessLayer\Entities\User.cs" />
     <Compile Include="DataAccessLayer\Repositories\IRepository.cs" />
     <Compile Include="DataAccessLayer\Repositories\ItemRepository.cs" />
     <Compile Include="DataAccessLayer\Repositories\Repository.cs" />
-    <Compile Include="Form1.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\202407291902233_InitialCreate.cs" />
     <Compile Include="Migrations\202407291902233_InitialCreate.Designer.cs">
       <DependentUpon>202407291902233_InitialCreate.cs</DependentUpon>
@@ -75,6 +71,10 @@
     <Compile Include="Migrations\202407301752003_AddItem.cs" />
     <Compile Include="Migrations\202407301752003_AddItem.Designer.cs">
       <DependentUpon>202407301752003_AddItem.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202408201805126_AddOrderDetails.cs" />
+    <Compile Include="Migrations\202408201805126_AddOrderDetails.Designer.cs">
+      <DependentUpon>202408201805126_AddOrderDetails.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="PresentationLayer\AddCategoryForm.cs">
@@ -113,6 +113,18 @@
     <Compile Include="PresentationLayer\LoginForm.Designer.cs">
       <DependentUpon>LoginForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="PresentationLayer\OrderDetailsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\OrderDetailsForm.Designer.cs">
+      <DependentUpon>OrderDetailsForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PresentationLayer\OrderForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PresentationLayer\OrderForm.Designer.cs">
+      <DependentUpon>OrderForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="PresentationLayer\UpdateItemForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -133,6 +145,9 @@
     <EmbeddedResource Include="Migrations\202407301752003_AddItem.resx">
       <DependentUpon>202407301752003_AddItem.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202408201805126_AddOrderDetails.resx">
+      <DependentUpon>202408201805126_AddOrderDetails.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\AddCategoryForm.resx">
       <DependentUpon>AddCategoryForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -150,6 +165,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\OrderDetailsForm.resx">
+      <DependentUpon>OrderDetailsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PresentationLayer\OrderForm.resx">
+      <DependentUpon>OrderForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PresentationLayer\UpdateItemForm.resx">
       <DependentUpon>UpdateItemForm.cs</DependentUpon>

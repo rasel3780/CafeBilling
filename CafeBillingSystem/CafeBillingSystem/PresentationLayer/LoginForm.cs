@@ -49,7 +49,7 @@ namespace CafeBillingSystem.PresentationLayer
 
                 {
 
-                    if (user != null)
+                    if (user != null && user.Role == Role.Admin)
                     {
 
                         var dashBoard = new AdminDashboardForm(user);
@@ -57,6 +57,13 @@ namespace CafeBillingSystem.PresentationLayer
                         progressBar.Visible = false;
                         this.Hide();
 
+                    }
+                    else if(user!=null && user.Role == Role.Employee)
+                    {
+                        var orderForm = new OrderForm(user);
+                        orderForm.Show();
+                        progressBar.Visible = false;
+                        this.Hide();    
                     }
                     else
                     {
