@@ -64,6 +64,7 @@
     <Compile Include="DataAccessLayer\Repositories\IRepository.cs" />
     <Compile Include="DataAccessLayer\Repositories\ItemRepository.cs" />
     <Compile Include="DataAccessLayer\Repositories\Repository.cs" />
+    <Compile Include="DataAccessLayer\Repositories\SaleRepository.cs" />
     <Compile Include="Migrations\202407291902233_InitialCreate.cs" />
     <Compile Include="Migrations\202407291902233_InitialCreate.Designer.cs">
       <DependentUpon>202407291902233_InitialCreate.cs</DependentUpon>

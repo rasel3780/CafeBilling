@@ -74,10 +74,7 @@ namespace CafeBillingSystem.PresentationLayer
             dgvOrders.DataSource = orders;
         }
 
-        private void AddSearchBox()
-        {
-            
-        }
+    
 
 
         private void AddToCart(Item item)
@@ -310,6 +307,15 @@ namespace CafeBillingSystem.PresentationLayer
         {
             txtBoxSearchItem.ForeColor = Color.Gray;
             OrderSearchBox.ForeColor = Color.Gray;
+            if(_loggedInUser.Role==Role.Admin)
+            {
+                btnBack.Visible = true;
+            }
+            else
+            {
+                btnBack.Visible = false;
+            }
+            
         }
 
 
@@ -626,6 +632,13 @@ namespace CafeBillingSystem.PresentationLayer
                                 .ToList();  
 
             dgvOrders.DataSource = filterOrder;
+        }
+
+        private void btnBack_Click(object sender, EventArgs e)
+        {
+            var adminDashBoardForm = new AdminDashboardForm(_loggedInUser);
+            adminDashBoardForm.Show();
+            this.Hide();
         }
     }
 }
