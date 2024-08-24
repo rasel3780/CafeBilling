@@ -19,6 +19,7 @@ namespace CafeBillingSystem.PresentationLayer
         private readonly User _loggedInUser;
         private readonly Repository<User> _userRepository;
         private readonly Repository<Item> _itemRepository;
+        private readonly SaleRepository _salesRepository;
 
         public AdminDashboardForm(User loggedInUser)
         {
@@ -27,6 +28,7 @@ namespace CafeBillingSystem.PresentationLayer
             var context = new CafeDbContext();
             _userRepository = new Repository<User>(context);
             _itemRepository = new Repository<Item>(context);
+            _salesRepository = new SaleRepository(context);
             SetEqualColumnFillWeights(dgvItems);
             SetEqualColumnFillWeights(dgvUsers);
             this.Load += AdminDashboardForm_Load;
@@ -36,7 +38,82 @@ namespace CafeBillingSystem.PresentationLayer
         {
             LoadUsers();
             LoadItems();
+            LoadSalesData();
+           
         }
+
+        private void LoadSalesData()
+        {
+            lblTodaysSales.Text = _salesRepository.GetTodaysSale().ToString("C");
+           
+            var selectedDate = dtpMonthlySales.Value;
+            var monthlySales = _salesRepository.GetMonthlySales(selectedDate.Year, selectedDate.Month);
+            lblMonthlySales.Text = monthlySales.ToString("C");
+            
+            var selectedYear = dtpYearlySales.Value;
+            var yearlySales = _salesRepository.GetYearlySales(selectedYear.Year);
+            lblYearlySales.Text = yearlySales.ToString("C");
+
+            var quantity = int.Parse(txtBoxTopSellingQuantity.Text);
+            LoadTopSellingItems(quantity);
+        }
+
+        private void LoadTopSellingItems(int quantity)
+        {
+            dgvTopSellingItems.AutoGenerateColumns = false;
+            dgvTopSellingItems.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+
+            if (!dgvTopSellingItems.Columns.Contains("Id"))
+            {
+                dgvTopSellingItems.Columns.Add(new DataGridViewTextBoxColumn
+                {
+                    DataPropertyName = "Id",
+                    Name = "Id",
+                    HeaderText = "Id",
+                    ReadOnly = true
+
+                });
+            }
+
+            if (!dgvTopSellingItems.Columns.Contains("Name"))
+            {
+                dgvTopSellingItems.Columns.Add(new DataGridViewTextBoxColumn
+                {
+                    DataPropertyName = "Name",
+                    Name = "Name",
+                    HeaderText = "Name",
+                    ReadOnly = true
+
+                });
+            }
+
+            if (!dgvTopSellingItems.Columns.Contains("Category"))
+            {
+                dgvTopSellingItems.Columns.Add(new DataGridViewTextBoxColumn
+                {
+                    DataPropertyName = "Category",
+                    Name = "Category",
+                    HeaderText = "Category",
+                    ReadOnly = true
+
+                });
+            }
+
+            if (!dgvTopSellingItems.Columns.Contains("Price"))
+            {
+                dgvTopSellingItems.Columns.Add(new DataGridViewTextBoxColumn
+                {
+                    DataPropertyName = "Price",
+                    Name = "Price",
+                    HeaderText = "Price",
+                    ReadOnly = true
+
+                });
+            }
+
+            dgvTopSellingItems.DataSource = _salesRepository.GetTopSellingItems(quantity);
+        }
+
         private void SetEqualColumnFillWeights(DataGridView dgv)
         {
             int columnCount = dgv.ColumnCount;
@@ -314,6 +391,30 @@ namespace CafeBillingSystem.PresentationLayer
             var orderForm = new OrderForm(_loggedInUser);
             orderForm.Show();
             this.Hide();
+        }
+
+        //REPORT 
+
+        private void dtpMonthlySales_ValueChanged(object sender, EventArgs e)
+        {
+            LoadSalesData();
+        }
+
+        private void dtpYearlySales_ValueChanged(object sender, EventArgs e)
+        {
+            LoadSalesData();
+        }
+
+        private void txtBoxTopSellingQuantity_TextChanged(object sender, EventArgs e)
+        {
+            if (txtBoxTopSellingQuantity.Text != string.Empty)
+            {
+                var quantity = int.Parse(txtBoxTopSellingQuantity.Text);
+                if (quantity > 0)
+                {
+                    LoadTopSellingItems(quantity);
+                }
+            }
         }
     }
 }
