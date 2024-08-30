@@ -29,8 +29,7 @@ namespace CafeBillingSystem.PresentationLayer
             _userRepository = new Repository<User>(context);
             _itemRepository = new Repository<Item>(context);
             _salesRepository = new SaleRepository(context);
-            SetEqualColumnFillWeights(dgvItems);
-            SetEqualColumnFillWeights(dgvUsers);
+  
             this.Load += AdminDashboardForm_Load;
         }
 
@@ -39,7 +38,8 @@ namespace CafeBillingSystem.PresentationLayer
             LoadUsers();
             LoadItems();
             LoadSalesData();
-           
+            dtpYearlySales.Format = DateTimePickerFormat.Custom;
+            dtpYearlySales.CustomFormat = "yyyy";
         }
 
         private void LoadSalesData()
@@ -114,23 +114,34 @@ namespace CafeBillingSystem.PresentationLayer
             dgvTopSellingItems.DataSource = _salesRepository.GetTopSellingItems(quantity);
         }
 
-        private void SetEqualColumnFillWeights(DataGridView dgv)
-        {
-            int columnCount = dgv.ColumnCount;
-            if (columnCount == 0) return;
-
-            float equalWeight = 1f / columnCount;
-            foreach (DataGridViewColumn column in dgv.Columns)
-            {
-                column.FillWeight = equalWeight;
-            }
-        }
 
 
         #region LOAD USERS
         private void LoadUsers()
         {
+
             var users = _userRepository.GetAll();
+
+            // Set default cell styles
+            dgvUsers.DefaultCellStyle.Font = new Font("Cambria", 10);
+    
+
+            // Set alternating row styles
+            dgvUsers.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(255, 229, 229, 229);
+            dgvUsers.RowTemplate.Height = 30;
+            dgvUsers.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
+
+
+            // Customize header styles
+            dgvUsers.ColumnHeadersDefaultCellStyle.Font = new Font("Cambria", 10);
+            dgvUsers.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
+            dgvUsers.ColumnHeadersDefaultCellStyle.BackColor = Color.Navy;
+            dgvUsers.EnableHeadersVisualStyles = false;
+
+            // Add padding to cells
+            Padding cellPadding = new Padding(1);
+            dgvUsers.DefaultCellStyle.Padding = cellPadding;
+
             dgvUsers.DataSource = users;
             dgvUsers.Columns["Password"].Visible = false;
 
@@ -146,6 +157,8 @@ namespace CafeBillingSystem.PresentationLayer
                     Text = "Update",
                     UseColumnTextForButtonValue = true
                 };
+                updateButtonColumn.FlatStyle = FlatStyle.Popup;
+                updateButtonColumn.DefaultCellStyle.ForeColor = Color.Green;                
                 dgvUsers.Columns.Add(updateButtonColumn);
             }
             
@@ -158,20 +171,45 @@ namespace CafeBillingSystem.PresentationLayer
                     Text = "Delete",
                     UseColumnTextForButtonValue = true
                 };
+
+                deleteButtonColumn.FlatStyle = FlatStyle.Popup;
+                deleteButtonColumn.DefaultCellStyle.ForeColor = Color.Red;
                 dgvUsers.Columns.Add(deleteButtonColumn);
             }
 
             
-            SetEqualColumnFillWeights(dgvUsers);
+            
 
         }
         #endregion
         private void LoadItems()
         {
+
             var items = _itemRepository.GetAll();
             dgvItems.DataSource = items;
 
-            
+
+            // Set default cell styles
+            dgvItems.DefaultCellStyle.Font = new Font("Cambria", 10);
+            dgvItems.DefaultCellStyle.SelectionBackColor = Color.Green;
+
+
+            // Set alternating row styles
+            dgvItems.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(255,229,229,229);
+            dgvItems.RowTemplate.Height = 30;
+            dgvItems.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
+
+
+            // Customize header styles
+            dgvItems.ColumnHeadersDefaultCellStyle.Font = new Font("Cambria", 10);
+            dgvItems.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
+            dgvItems.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(255,29,204,0) ;
+            dgvItems.EnableHeadersVisualStyles = false;
+
+            // Add padding to cells
+            Padding cellPadding = new Padding(1);
+            dgvItems.DefaultCellStyle.Padding = cellPadding;
+
 
             dgvItems.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
 
@@ -192,7 +230,7 @@ namespace CafeBillingSystem.PresentationLayer
                 HeaderText = "Image",
                 ImageLayout = DataGridViewImageCellLayout.Zoom,
             };
-            dgvItems.Columns.Add(imageColumn); // Add the image column
+            dgvItems.Columns.Add(imageColumn); 
 
             foreach (DataGridViewRow row in dgvItems.Rows)
             {
@@ -201,17 +239,16 @@ namespace CafeBillingSystem.PresentationLayer
                 {
                     if (!string.IsNullOrEmpty(item.PicturePath) && File.Exists(item.PicturePath))
                     {
-                        row.Cells["Image"].Value = ResizeImage(Image.FromFile(item.PicturePath), new Size(100, 100)); // Resize the image to fit the cell
+                        row.Cells["Image"].Value = ResizeImage(Image.FromFile(item.PicturePath), new Size(50, 25)); // Resize the image to fit the cell
                     }
                     else
                     {
                         string defaultImagePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "img", "default.png");
-                        row.Cells["Image"].Value = ResizeImage(Image.FromFile(defaultImagePath), new Size(100, 100)); // Resize the image to fit the cell
+                        row.Cells["Image"].Value = ResizeImage(Image.FromFile(defaultImagePath), new Size(50, 25)); // Resize the image to fit the cell
                     }
                 }
             }
 
-            // Ensure Update button column exists
             if (!dgvItems.Columns.Contains("Update"))
             {
                 var updateButtonColumn = new DataGridViewButtonColumn
@@ -221,10 +258,11 @@ namespace CafeBillingSystem.PresentationLayer
                     Text = "Update",
                     UseColumnTextForButtonValue = true,
                 };
+                updateButtonColumn.FlatStyle = FlatStyle.Popup;
+                updateButtonColumn.DefaultCellStyle.ForeColor = Color.Green;
                 dgvItems.Columns.Add(updateButtonColumn);
             }
 
-            // Ensure Delete button column exists
             if (!dgvItems.Columns.Contains("Delete"))
             {
                 var deleteButtonColumn = new DataGridViewButtonColumn
@@ -234,10 +272,11 @@ namespace CafeBillingSystem.PresentationLayer
                     Text = "Delete",
                     UseColumnTextForButtonValue = true,
                 };
+                deleteButtonColumn.FlatStyle = FlatStyle.Popup;
+                deleteButtonColumn.DefaultCellStyle.ForeColor = Color.Red;
                 dgvItems.Columns.Add(deleteButtonColumn);
             }
 
-            // Set the DisplayIndex for each column to arrange them in the desired order
             dgvItems.Columns["Id"].DisplayIndex = 0;
             dgvItems.Columns["Name"].DisplayIndex = 1;
             dgvItems.Columns["Price"].DisplayIndex = 2;
@@ -246,7 +285,7 @@ namespace CafeBillingSystem.PresentationLayer
             dgvItems.Columns["Update"].DisplayIndex = 5;
             dgvItems.Columns["Delete"].DisplayIndex = 6;
 
-            SetEqualColumnFillWeights(dgvItems);
+           
         }
 
 
@@ -282,16 +321,7 @@ namespace CafeBillingSystem.PresentationLayer
 
         private void dgvItems_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
-            if (dgvItems.Columns[e.ColumnIndex].Name == "Delete")
-            {
-                e.CellStyle.BackColor = Color.Red;
-                e.CellStyle.ForeColor = Color.White;
-            }
-            else if (dgvItems.Columns[e.ColumnIndex].Name == "Update")
-            {
-                e.CellStyle.BackColor = Color.Green;
-                e.CellStyle.ForeColor = Color.White;
-            }
+           
         }
 
         private void btnAddUser_Click(object sender, EventArgs e)

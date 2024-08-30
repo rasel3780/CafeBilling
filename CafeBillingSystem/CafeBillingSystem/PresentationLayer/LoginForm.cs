@@ -16,6 +16,7 @@ namespace CafeBillingSystem.PresentationLayer
     public partial class LoginForm : Form
     {
         private readonly Repository<User> _userRepository;
+        private readonly string requiredMessage = "This field is required";
         public LoginForm()
         {
             InitializeComponent();
@@ -23,7 +24,7 @@ namespace CafeBillingSystem.PresentationLayer
             _userRepository = new Repository<User>(context);
         }
 
-       
+
 
         private void LoginForm_FormClosing(object sender, FormClosingEventArgs e)
         {
@@ -32,47 +33,90 @@ namespace CafeBillingSystem.PresentationLayer
 
         private void LoginForm_Load(object sender, EventArgs e)
         {
-
+            lblUserName.Visible = false;
+            lblPassword.Visible = false;
+            lblUserName.ForeColor = Color.Red;
+            lblPassword.ForeColor = Color.Red;
         }
 
-        private void btnLogin_Click(object sender, EventArgs e)
+        private  void btnLogin_Click(object sender, EventArgs e)
         {
+            // Checking if textboxes are empty
+            if (txtUsername.Text == "")
+            {
+                lblUserName.Visible = true;
+                return;
+            }
+            if (txtPassword.Text == "")
+            {
+                lblPassword.Visible = true;
+                return;
+            }
             progressBar.Visible = true;
             btnLogin.Enabled = false;
 
-            Task.Run(() =>
+            try
             {
+                // Filtering user by username and password
                 var user = _userRepository.GetAll()
                .FirstOrDefault(u => u.Username == txtUsername.Text && u.Password == txtPassword.Text);
 
-                this.Invoke(new Action(() =>
 
+                Task.Delay(2000);
+
+                // If verified and role is admin, then open Admin Dashboard form
+                if (user != null && user.Role == Role.Admin)
                 {
+                    var dashBoard = new AdminDashboardForm(user);
+                    dashBoard.Show();
+                    this.Hide();
 
-                    if (user != null && user.Role == Role.Admin)
-                    {
+                }
+                // If verified and role is Employee, then open Admin Order form
+                else if (user != null && user.Role == Role.Employee)
+                {
+                    var orderForm = new OrderForm(user);
+                    orderForm.Show();
+                    this.Hide();
+                }
+                //Username or password is incorrect. User is not verified
+                else
+                {
+                    btnLogin.Enabled = true;
+                    progressBar.Visible = false;
+                    MessageBox.Show("Invalid Username or Password", "Wrong credentials",
+                        MessageBoxButtons.OK, MessageBoxIcon.Warning); ;
+                }
 
-                        var dashBoard = new AdminDashboardForm(user);
-                        dashBoard.Show();
-                        progressBar.Visible = false;
-                        this.Hide();
 
-                    }
-                    else if(user!=null && user.Role == Role.Employee)
-                    {
-                        var orderForm = new OrderForm(user);
-                        orderForm.Show();
-                        progressBar.Visible = false;
-                        this.Hide();    
-                    }
-                    else
-                    {
-                        btnLogin.Enabled = true;
-                        progressBar.Visible = false;
-                        MessageBox.Show("Invalid Username or Password");
-                    }
-                }));
-            });
+            }
+            catch
+            {
+                MessageBox.Show("There was a problem while trying to log in. " +
+                    "Please try again later.", "Login Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                progressBar.Visible = false;
+            }
         }
+
+        private void txtPassword_TextChanged(object sender, EventArgs e)
+        {
+            if (txtPassword.Text.Length > 0)
+            {
+                lblPassword.Visible = false;
+            }
+        }
+
+        private void txtUsername_TextChanged(object sender, EventArgs e)
+        {
+            if (txtUsername.Text.Length > 0)
+            {
+                lblUserName.Visible = false;
+            }
+        }
+
     }
 }

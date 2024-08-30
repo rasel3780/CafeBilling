@@ -31,8 +31,28 @@ namespace CafeBillingSystem.PresentationLayer
             _loggedInUser = user;
         }
 
-        private void btnSave_Click(object sender, EventArgs e)
+        private async void btnSave_Click(object sender, EventArgs e)
         {
+
+            if(string.IsNullOrEmpty(txtName.Text))
+            {
+                lblItemName.Visible = true;
+                return;
+            }
+
+            if(string.IsNullOrEmpty(txtPrice.Text))
+            {
+                lblPrice.Visible = true; 
+                return;
+            }
+            
+            if(cmbCategories.SelectedIndex == -1)
+            {
+                lblcmbBox.ForeColor = Color.Red;
+                lblcmbBox.Visible = true;
+                return;
+            }
+
             string imgDirectory = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "img");
 
             if (!Directory.Exists(imgDirectory))
@@ -47,27 +67,38 @@ namespace CafeBillingSystem.PresentationLayer
                 File.Copy(picItem.ImageLocation, imagePath);
             }
 
-            var newItem = new Item
+            
+            progressBar.Visible = true;
+            lblLoading.Visible = true;
+            try
             {
-                Name = txtName.Text,
-                Price = decimal.Parse(txtPrice.Text),
-                Category = cmbCategories.SelectedItem?.ToString(),
-                PicturePath = imagePath
-            };
-            if (cmbCategories.SelectedIndex == -1)
-            {
-                MessageBox.Show("Please select a category.", "Category Required", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-            else
-            {
+                var newItem = new Item
+                {
+                    Name = txtName.Text,
+                    Price = decimal.Parse(txtPrice.Text),
+                    Category = cmbCategories.SelectedItem?.ToString(),
+                    PicturePath = imagePath
+                };
                 _itemRepository.Add(newItem);
+                await Task.Delay(2000);
                 MessageBox.Show("Item added successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                this.Hide();
+            }
+            catch(Exception ex) 
+            {
+                MessageBox.Show(ex.Message.ToString());
+            }
+            finally
+            {
                 var adminDashboard = new AdminDashboardForm(_loggedInUser);
                 adminDashboard.Show();
+                progressBar.Visible = false;
+                lblLoading.Visible = false;
+                this.Hide();
             }
+            
            
+
+
         }
     
 
@@ -92,9 +123,11 @@ namespace CafeBillingSystem.PresentationLayer
 
         private void btnCancle_Click(object sender, EventArgs e)
         {
-            this.Hide();
+            Task.Delay(1000);
+            progressBar.Visible = true;
             var adminDashboard = new AdminDashboardForm(_loggedInUser);
             adminDashboard.Show();
+            this.Hide();
         }
 
         private void AddItemForm_FormClosing(object sender, FormClosingEventArgs e)
@@ -152,6 +185,22 @@ namespace CafeBillingSystem.PresentationLayer
                 picItem.ImageLocation = openFileDialog.FileName;
 
                 picItem.ImageLocation = openFileDialog.FileName;
+            }
+        }
+
+        private void txtName_TextChanged(object sender, EventArgs e)
+        {
+            if(txtName.Text.Length > 0)
+            {
+                lblItemName.Visible = false;
+            }
+        }
+
+        private void txtPrice_TextChanged(object sender, EventArgs e)
+        {
+            if(txtPrice.Text.Length > 0)
+            {
+                lblPrice.Visible = false;
             }
         }
     }

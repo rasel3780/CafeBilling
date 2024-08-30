@@ -46,12 +46,12 @@
             this.lblTodaysSales = new System.Windows.Forms.Label();
             this.lblMonthlySales = new System.Windows.Forms.Label();
             this.lblYearlySales = new System.Windows.Forms.Label();
-            this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
-            this.label6 = new System.Windows.Forms.Label();
-            this.dgvTopSellingItems = new System.Windows.Forms.DataGridView();
             this.dtpMonthlySales = new System.Windows.Forms.DateTimePicker();
             this.dtpYearlySales = new System.Windows.Forms.DateTimePicker();
+            this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
+            this.dgvTopSellingItems = new System.Windows.Forms.DataGridView();
             this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
+            this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.txtBoxTopSellingQuantity = new System.Windows.Forms.TextBox();
             this.panel1.SuspendLayout();
@@ -75,7 +75,7 @@
             this.panel1.Controls.Add(this.tableLayoutPanel1);
             this.panel1.Location = new System.Drawing.Point(12, 12);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1161, 610);
+            this.panel1.Size = new System.Drawing.Size(1178, 610);
             this.panel1.TabIndex = 0;
             // 
             // tableLayoutPanel2
@@ -85,23 +85,24 @@
             this.tableLayoutPanel2.ColumnCount = 3;
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 95.03817F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 4.961832F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 108F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 110F));
             this.tableLayoutPanel2.Controls.Add(this.btnLogout, 2, 0);
             this.tableLayoutPanel2.Controls.Add(this.btnOrder, 0, 0);
             this.tableLayoutPanel2.Location = new System.Drawing.Point(20, 566);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 1;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(1121, 39);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(1138, 39);
             this.tableLayoutPanel2.TabIndex = 1;
             // 
             // btnLogout
             // 
             this.btnLogout.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.btnLogout.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.btnLogout.Font = new System.Drawing.Font("Microsoft YaHei UI", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnLogout.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnLogout.Font = new System.Drawing.Font("Cambria", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnLogout.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.btnLogout.Location = new System.Drawing.Point(1029, 3);
+            this.btnLogout.Location = new System.Drawing.Point(1046, 3);
             this.btnLogout.Name = "btnLogout";
             this.btnLogout.Size = new System.Drawing.Size(89, 33);
             this.btnLogout.TabIndex = 1;
@@ -113,6 +114,8 @@
             // 
             this.btnOrder.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.btnOrder.BackColor = System.Drawing.Color.Blue;
+            this.btnOrder.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnOrder.Font = new System.Drawing.Font("Cambria", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnOrder.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.btnOrder.Location = new System.Drawing.Point(3, 3);
             this.btnOrder.Name = "btnOrder";
@@ -146,18 +149,18 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 90.83665F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 37F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 169F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(1127, 526);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(1144, 526);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // dgvItems
             // 
             this.dgvItems.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvItems.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvItems.Location = new System.Drawing.Point(437, 32);
+            this.dgvItems.Location = new System.Drawing.Point(443, 32);
             this.dgvItems.Name = "dgvItems";
             this.dgvItems.RowHeadersWidth = 51;
             this.dgvItems.RowTemplate.Height = 24;
-            this.dgvItems.Size = new System.Drawing.Size(687, 284);
+            this.dgvItems.Size = new System.Drawing.Size(698, 284);
             this.dgvItems.TabIndex = 20;
             this.dgvItems.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvItems_CellContentClick);
             // 
@@ -169,7 +172,7 @@
             this.dgvUsers.Name = "dgvUsers";
             this.dgvUsers.RowHeadersWidth = 51;
             this.dgvUsers.RowTemplate.Height = 24;
-            this.dgvUsers.Size = new System.Drawing.Size(428, 284);
+            this.dgvUsers.Size = new System.Drawing.Size(434, 284);
             this.dgvUsers.TabIndex = 19;
             this.dgvUsers.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvUsers_CellContentClick);
             // 
@@ -177,12 +180,12 @@
             // 
             this.label1.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label1.AutoSize = true;
-            this.label1.BackColor = System.Drawing.SystemColors.Highlight;
-            this.label1.Font = new System.Drawing.Font("Cambria", 10.2F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.BackColor = System.Drawing.Color.Navy;
+            this.label1.Font = new System.Drawing.Font("Verdana", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(181, 4);
+            this.label1.Location = new System.Drawing.Point(178, 3);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(72, 20);
+            this.label1.Size = new System.Drawing.Size(83, 22);
             this.label1.TabIndex = 0;
             this.label1.Text = "User list";
             // 
@@ -190,12 +193,12 @@
             // 
             this.label2.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label2.AutoSize = true;
-            this.label2.BackColor = System.Drawing.SystemColors.Highlight;
-            this.label2.Font = new System.Drawing.Font("Cambria", 10.2F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.BackColor = System.Drawing.Color.Navy;
+            this.label2.Font = new System.Drawing.Font("Verdana", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.Color.White;
-            this.label2.Location = new System.Drawing.Point(754, 4);
+            this.label2.Location = new System.Drawing.Point(760, 3);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(52, 20);
+            this.label2.Size = new System.Drawing.Size(63, 22);
             this.label2.TabIndex = 0;
             this.label2.Text = "Items";
             // 
@@ -203,9 +206,10 @@
             // 
             this.btnAddUser.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btnAddUser.BackColor = System.Drawing.Color.Green;
-            this.btnAddUser.Font = new System.Drawing.Font("Microsoft YaHei UI", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAddUser.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnAddUser.Font = new System.Drawing.Font("Cambria", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAddUser.ForeColor = System.Drawing.Color.GhostWhite;
-            this.btnAddUser.Location = new System.Drawing.Point(167, 323);
+            this.btnAddUser.Location = new System.Drawing.Point(170, 323);
             this.btnAddUser.Name = "btnAddUser";
             this.btnAddUser.Size = new System.Drawing.Size(100, 29);
             this.btnAddUser.TabIndex = 21;
@@ -217,9 +221,10 @@
             // 
             this.btnAddItem.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btnAddItem.BackColor = System.Drawing.Color.Green;
-            this.btnAddItem.Font = new System.Drawing.Font("Microsoft YaHei UI", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAddItem.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnAddItem.Font = new System.Drawing.Font("Cambria", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAddItem.ForeColor = System.Drawing.Color.GhostWhite;
-            this.btnAddItem.Location = new System.Drawing.Point(730, 323);
+            this.btnAddItem.Location = new System.Drawing.Point(742, 323);
             this.btnAddItem.Name = "btnAddItem";
             this.btnAddItem.Size = new System.Drawing.Size(100, 29);
             this.btnAddItem.TabIndex = 21;
@@ -317,45 +322,6 @@
             this.lblYearlySales.TabIndex = 0;
             this.lblYearlySales.Text = "0.0";
             // 
-            // tableLayoutPanel4
-            // 
-            this.tableLayoutPanel4.ColumnCount = 1;
-            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel4.Controls.Add(this.dgvTopSellingItems, 0, 1);
-            this.tableLayoutPanel4.Controls.Add(this.tableLayoutPanel5, 0, 0);
-            this.tableLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel4.Location = new System.Drawing.Point(437, 359);
-            this.tableLayoutPanel4.Name = "tableLayoutPanel4";
-            this.tableLayoutPanel4.RowCount = 2;
-            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 23.17073F));
-            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 76.82927F));
-            this.tableLayoutPanel4.Size = new System.Drawing.Size(687, 164);
-            this.tableLayoutPanel4.TabIndex = 23;
-            // 
-            // label6
-            // 
-            this.label6.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.label6.AutoSize = true;
-            this.label6.BackColor = System.Drawing.SystemColors.Highlight;
-            this.label6.Font = new System.Drawing.Font("Calibri", 10.2F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.ForeColor = System.Drawing.Color.White;
-            this.label6.Location = new System.Drawing.Point(134, 5);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(35, 21);
-            this.label6.TabIndex = 0;
-            this.label6.Text = "Top";
-            // 
-            // dgvTopSellingItems
-            // 
-            this.dgvTopSellingItems.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvTopSellingItems.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvTopSellingItems.Location = new System.Drawing.Point(3, 40);
-            this.dgvTopSellingItems.Name = "dgvTopSellingItems";
-            this.dgvTopSellingItems.RowHeadersWidth = 51;
-            this.dgvTopSellingItems.RowTemplate.Height = 24;
-            this.dgvTopSellingItems.Size = new System.Drawing.Size(681, 121);
-            this.dgvTopSellingItems.TabIndex = 1;
-            // 
             // dtpMonthlySales
             // 
             this.dtpMonthlySales.Anchor = System.Windows.Forms.AnchorStyles.None;
@@ -378,12 +344,39 @@
             this.dtpYearlySales.TabIndex = 1;
             this.dtpYearlySales.ValueChanged += new System.EventHandler(this.dtpYearlySales_ValueChanged);
             // 
+            // tableLayoutPanel4
+            // 
+            this.tableLayoutPanel4.ColumnCount = 1;
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel4.Controls.Add(this.dgvTopSellingItems, 0, 1);
+            this.tableLayoutPanel4.Controls.Add(this.tableLayoutPanel5, 0, 0);
+            this.tableLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel4.Location = new System.Drawing.Point(443, 359);
+            this.tableLayoutPanel4.Name = "tableLayoutPanel4";
+            this.tableLayoutPanel4.RowCount = 2;
+            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 23.17073F));
+            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 76.82927F));
+            this.tableLayoutPanel4.Size = new System.Drawing.Size(698, 164);
+            this.tableLayoutPanel4.TabIndex = 23;
+            // 
+            // dgvTopSellingItems
+            // 
+            this.dgvTopSellingItems.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvTopSellingItems.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvTopSellingItems.Location = new System.Drawing.Point(3, 40);
+            this.dgvTopSellingItems.Name = "dgvTopSellingItems";
+            this.dgvTopSellingItems.RowHeadersWidth = 51;
+            this.dgvTopSellingItems.RowTemplate.Height = 24;
+            this.dgvTopSellingItems.Size = new System.Drawing.Size(692, 121);
+            this.dgvTopSellingItems.TabIndex = 1;
+            // 
             // tableLayoutPanel5
             // 
+            this.tableLayoutPanel5.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.tableLayoutPanel5.ColumnCount = 3;
             this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 71.71315F));
             this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 28.28685F));
-            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 366F));
+            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 368F));
             this.tableLayoutPanel5.Controls.Add(this.label6, 0, 0);
             this.tableLayoutPanel5.Controls.Add(this.label7, 2, 0);
             this.tableLayoutPanel5.Controls.Add(this.txtBoxTopSellingQuantity, 1, 0);
@@ -394,16 +387,29 @@
             this.tableLayoutPanel5.Size = new System.Drawing.Size(606, 31);
             this.tableLayoutPanel5.TabIndex = 2;
             // 
+            // label6
+            // 
+            this.label6.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.label6.AutoSize = true;
+            this.label6.BackColor = System.Drawing.Color.MidnightBlue;
+            this.label6.Font = new System.Drawing.Font("Calibri", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.ForeColor = System.Drawing.Color.White;
+            this.label6.Location = new System.Drawing.Point(132, 5);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(35, 21);
+            this.label6.TabIndex = 0;
+            this.label6.Text = "Top";
+            // 
             // label7
             // 
             this.label7.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label7.AutoSize = true;
-            this.label7.BackColor = System.Drawing.SystemColors.Highlight;
-            this.label7.Font = new System.Drawing.Font("Calibri", 10.2F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.BackColor = System.Drawing.Color.MidnightBlue;
+            this.label7.Font = new System.Drawing.Font("Calibri", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label7.ForeColor = System.Drawing.Color.White;
-            this.label7.Location = new System.Drawing.Point(242, 5);
+            this.label7.Location = new System.Drawing.Point(240, 5);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(100, 21);
+            this.label7.Size = new System.Drawing.Size(101, 21);
             this.label7.TabIndex = 0;
             this.label7.Text = "Selling Items";
             // 
@@ -411,7 +417,7 @@
             // 
             this.txtBoxTopSellingQuantity.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.txtBoxTopSellingQuantity.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtBoxTopSellingQuantity.Location = new System.Drawing.Point(175, 4);
+            this.txtBoxTopSellingQuantity.Location = new System.Drawing.Point(173, 4);
             this.txtBoxTopSellingQuantity.Name = "txtBoxTopSellingQuantity";
             this.txtBoxTopSellingQuantity.Size = new System.Drawing.Size(60, 22);
             this.txtBoxTopSellingQuantity.TabIndex = 1;
@@ -423,7 +429,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1184, 634);
+            this.ClientSize = new System.Drawing.Size(1201, 634);
             this.Controls.Add(this.panel1);
             this.Name = "AdminDashboardForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
