@@ -31,7 +31,7 @@ namespace CafeBillingSystem.PresentationLayer
             _loggedInUser = user;
         }
 
-        private async void btnSave_Click(object sender, EventArgs e)
+        private void btnSave_Click(object sender, EventArgs e)
         {
 
             if(string.IsNullOrEmpty(txtName.Text))
@@ -60,14 +60,33 @@ namespace CafeBillingSystem.PresentationLayer
                 Directory.CreateDirectory(imgDirectory);
             }
 
-            string imagePath = Path.Combine(imgDirectory, Path.GetFileName(picItem.ImageLocation));
+            string imagePath;
 
-            if (!File.Exists(imagePath))
+            // Check if the user selected an image; otherwise, use a default image
+            if (picItem.ImageLocation != null)
             {
-                File.Copy(picItem.ImageLocation, imagePath);
+                imagePath = Path.Combine(imgDirectory, Path.GetFileName(picItem.ImageLocation));
+
+                // If the image doesn't already exist in the folder, copy it
+                if (!File.Exists(imagePath))
+                {
+                    File.Copy(picItem.ImageLocation, imagePath);
+                }
+            }
+            else
+            {
+                // Use a default image if the user hasn't selected any image
+                imagePath = Path.Combine(imgDirectory, "default.png");
+
+                // Ensure the default image exists in the img folder
+                if (!File.Exists(imagePath))
+                {
+                    MessageBox.Show("Default image not found! Please ensure a 'default.jpg' exists in the img folder.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
             }
 
-            
+
             progressBar.Visible = true;
             lblLoading.Visible = true;
             try
@@ -80,12 +99,12 @@ namespace CafeBillingSystem.PresentationLayer
                     PicturePath = imagePath
                 };
                 _itemRepository.Add(newItem);
-                await Task.Delay(2000);
+                Task.Delay(2000);
                 MessageBox.Show("Item added successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch(Exception ex) 
             {
-                MessageBox.Show(ex.Message.ToString());
+                MessageBox.Show("There was a problem, try again" + ex.Message.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); ;
             }
             finally
             {
@@ -123,8 +142,10 @@ namespace CafeBillingSystem.PresentationLayer
 
         private void btnCancle_Click(object sender, EventArgs e)
         {
-            Task.Delay(1000);
             progressBar.Visible = true;
+            lblLoading.Visible = true;
+
+            Task.Delay(1000);
             var adminDashboard = new AdminDashboardForm(_loggedInUser);
             adminDashboard.Show();
             this.Hide();
