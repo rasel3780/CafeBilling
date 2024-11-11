@@ -93,10 +93,7 @@ namespace CafeBillingSystem.PresentationLayer
                     Quantity = 1
                 };
             }
-            foreach (var foodItem in cartItems)
-            {
-                MessageBox.Show("Key:" + foodItem.Key.ToString() + ":" + foodItem.Value.Name + "-Quantity:" + foodItem.Value.Quantity.ToString() + "-id:" + foodItem.Value.ItemId);
-            }
+            
             UpdateCartView();
         }
 
@@ -329,11 +326,10 @@ namespace CafeBillingSystem.PresentationLayer
                 if (e.ColumnIndex == dgvItems.Columns["Sell"].Index)
                 {
                     var itemId = (int)dgvItems.Rows[e.RowIndex].Cells["Id"].Value;
-                    MessageBox.Show(itemId.ToString());
+                   
                     var item = _itemRepository.GetById(itemId);
                     if (item != null)
                     {
-                        MessageBox.Show("Name-" + item.Name + "-Price-" + item.Price.ToString());
                         AddToCart(item);
                     }
                 }
@@ -361,7 +357,7 @@ namespace CafeBillingSystem.PresentationLayer
 
 
                 var itemId = (int)dgvCart.Rows[e.RowIndex].Cells["Id"].Value;
-                MessageBox.Show(itemId.ToString());
+               
 
                 
                 if (e.ColumnIndex == dgvCart.Columns["Decrease"].Index)
