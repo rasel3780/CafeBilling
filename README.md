@@ -3,6 +3,5 @@
 - Key features include quick invoice creation, daily, monthly, and yearly sales reporting, order history, and top-selling item tracking.
 - Implemented Entity Framework, Repository pattern architecture and Code first approach.
 
-<img src="" w>
+<img src="https://github.com/rasel3780/CafeBilling/blob/documentation/Project%20images/loginForm.png" alt="Login Form" width="300" height="150">
 
-![Resized Image](https://github.com/rasel3780/CafeBilling/blob/documentation/Project%20images/loginForm.png "Login Form") width=400 height=300
