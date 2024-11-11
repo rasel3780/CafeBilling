@@ -8,6 +8,7 @@ using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -230,8 +231,9 @@ namespace CafeBillingSystem.PresentationLayer
                 HeaderText = "Image",
                 ImageLayout = DataGridViewImageCellLayout.Zoom,
             };
-            dgvItems.Columns.Add(imageColumn); 
+            dgvItems.Columns.Add(imageColumn);
 
+            string defaultImagePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "images", "noPhoto.png");
             foreach (DataGridViewRow row in dgvItems.Rows)
             {
                 var item = row.DataBoundItem as Item;
@@ -243,7 +245,6 @@ namespace CafeBillingSystem.PresentationLayer
                     }
                     else
                     {
-                        string defaultImagePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "img", "default.png");
                         row.Cells["Image"].Value = ResizeImage(Image.FromFile(defaultImagePath), new Size(50, 25)); // Resize the image to fit the cell
                     }
                 }
