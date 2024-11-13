@@ -20,12 +20,11 @@
 
 #### Sales reports 
 <hr>
-<img src="https://github.com/rasel3780/CafeBilling/blob/main/Project%20images/salesReport.png" alt="Sales reports" width="800" height="400">
+<img src="https://github.com/rasel3780/CafeBilling/blob/main/Project%20images/salesReport.png" alt="Sales reports" width="500" height="400">
 
 #### Top selling items
-<img src="https://github.com/rasel3780/CafeBilling/blob/main/Project%20images/topSellingItems.png" alt="Top selling items" width="800" height="400">
-
-
+<hr>
+<img src="https://github.com/rasel3780/CafeBilling/blob/main/Project%20images/topSellingItems.png" alt="Top selling items" width="500" height="400">
 
 ### Order Form
 <hr>
